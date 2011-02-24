@@ -25,3 +25,6 @@
 [submodule "bundle/align"]
 	path = bundle/align
 	url = https://github.com/clones/vim-align.git
+[submodule "bundle/easygrep"]
+	path = bundle/easygrep
+	url = https://github.com/gaving/vim-easygrep.git
