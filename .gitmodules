@@ -37,3 +37,6 @@
 [submodule "bundle/supertab-continued"]
 	path = bundle/supertab-continued
 	url = https://github.com/vim-scripts/SuperTab-continued..git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
