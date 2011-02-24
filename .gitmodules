@@ -16,3 +16,6 @@
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = https://github.com/corntrace/bufexplorer.git
+[submodule "bundle/camelcasemotion"]
+	path = bundle/camelcasemotion
+	url = https://github.com/bkad/CamelCaseMotion.git
