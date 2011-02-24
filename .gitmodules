@@ -49,3 +49,6 @@
 [submodule "bundle/jsbeautify"]
 	path = bundle/jsbeautify
 	url = https://github.com/vim-scripts/jsbeautify.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
