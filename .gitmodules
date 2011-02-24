@@ -46,3 +46,6 @@
 [submodule "bundle/javascriptlint"]
 	path = bundle/javascriptlint
 	url = https://github.com/joestelmach/javaScriptLint.vim.git
+[submodule "bundle/jsbeautify"]
+	path = bundle/jsbeautify
+	url = https://github.com/vim-scripts/jsbeautify.git
