@@ -31,3 +31,6 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/clones/vim-taglist.git
+[submodule "bundle/matchit"]
+	path = bundle/matchit
+	url = https://github.com/tsaleh/vim-matchit.git
