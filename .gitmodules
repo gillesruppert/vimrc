@@ -28,3 +28,6 @@
 [submodule "bundle/easygrep"]
 	path = bundle/easygrep
 	url = https://github.com/gaving/vim-easygrep.git
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/clones/vim-taglist.git
