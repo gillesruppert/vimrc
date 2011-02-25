@@ -52,3 +52,6 @@
 [submodule "bundle/javascriptlint"]
 	path = bundle/javascriptlint
 	url = git@github.com:gillesruppert/javaScriptLint.vim.git
+[submodule "bundle/html5"]
+	path = bundle/html5
+	url = https://github.com/othree/html5.vim.git
