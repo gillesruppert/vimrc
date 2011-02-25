@@ -214,6 +214,10 @@ let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:functi
 let g:EasyGrepMode = 2
 let g:EasyGrepRecursive = 1
 
+" JavaScriptLint
+let jslint_command = '~/.vim/jsl-0.3.0-mac/jsl'
+let jslint_command_options = '-nofilelisting -nocontext -nosummary -nologo -conf ~/.vim/jsl-0.3.0-mac/jsl.conf -process'
+
 
 
 " vim tools
