@@ -5,6 +5,7 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+"""""""""""""""""
 "general settings
 syntax on
 filetype on
@@ -109,16 +110,15 @@ endif
 set grepprg=ack\ -ai
 
 
+"""""""""""""""""
 " added filetypes
 au BufNewFile,BufRead *.spv set filetype=php "add filetype
 au BufNewFile,BufRead *.jqt set filetype=html "add filetype
 au BufNewFile,BufRead *.liquid set filetype=xhtml "add filetype
 au BufNewFile,BufRead *.json set filetype=json "add filetype
-augroup mkd " add markdown syntax
-	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
-augroup END
 
 
+""""""""""""""""""""
 " keyboard shortcuts
 " edit and save .vimrc quickly
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
@@ -197,8 +197,13 @@ nmap <silent> <leader>i :set nolist!<CR>
 map <leader>l :TlistToggle<CR>
 map <F8> :!~/.vim/utils/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
-" Plugin settings
+" Task
+inoremap <silent> <buffer> <C-D-CR> <ESC>:call Toggle_task_status()<CR>i
+noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
 
+
+""""""""""""""""
+" Plugin settings
 " automatically close tag as needed
 "au Filetype html,xml,xsl,php,spv,phtml source $HOME/.vim/scripts/closetag.vim
 
@@ -218,8 +223,13 @@ let g:EasyGrepRecursive = 1
 let jslint_command = '~/.vim/jsl-0.3.0-mac/jsl'
 let jslint_command_options = '-nofilelisting -nocontext -nosummary -nologo -conf ~/.vim/jsl-0.3.0-mac/jsl.conf -process'
 
+" Markdown
+augroup mkd " add markdown syntax
+	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+augroup END
 
 
+"""""""""""
 " vim tools
 " create a uuid
 imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
