@@ -49,3 +49,6 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
+[submodule "bundle/javascriptlint"]
+	path = bundle/javascriptlint
+	url = git@github.com:gillesruppert/javaScriptLint.vim.git
