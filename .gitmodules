@@ -40,9 +40,6 @@
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/grayrest/vim-syntastic.git
 [submodule "bundle/jsbeautify"]
 	path = bundle/jsbeautify
 	url = https://github.com/vim-scripts/jsbeautify.git
