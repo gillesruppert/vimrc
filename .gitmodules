@@ -58,3 +58,6 @@
 [submodule "bundle/task"]
 	path = bundle/task
 	url = https://github.com/samsonw/vim-task.git
+[submodule "bundle/simple-javascript-indenter"]
+	path = bundle/simple-javascript-indenter
+	url = https://github.com/JiangMiao/simple-javascript-indenter.git
