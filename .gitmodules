@@ -72,4 +72,4 @@
 	url = https://github.com/hallettj/jslint.vim.git
 [submodule "bundle/jshint"]
 	path = bundle/jshint
-	url = https://github.com/wookiehangover/jshint.vim.git
+	url = git@github.com:gillesruppert/jshint.vim.git
