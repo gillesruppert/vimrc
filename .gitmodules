@@ -79,3 +79,6 @@
 [submodule "bundle/CSApprox"]
 	path = bundle/CSApprox
 	url = https://github.com/vim-scripts/CSApprox.git
+[submodule "bundle/textile"]
+	path = bundle/textile
+	url = https://github.com/vim-scripts/Textile-for-VIM.git
