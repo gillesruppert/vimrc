@@ -92,9 +92,12 @@ set bg=dark
 set guioptions-=m
 set guioptions-=T
 
-if &t_Co >= 256 || has("gui_running")
+if has("gui_running")
 	"colorscheme my-wombat
 	colorscheme mustang
+elseif &t_Co >= 256
+  ":let g:CSApprox_loaded = 1
+  colorscheme mustang_term
 endif
 
 " Font. Very important.
