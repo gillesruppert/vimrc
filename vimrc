@@ -5,6 +5,8 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+" set t_Co=256
+
 """""""""""""""""
 "general settings
 syntax on
@@ -110,7 +112,7 @@ elseif has('unix')
 endif
 
 " set ack as the grep programme
-set grepprg=ack\ -ai
+" set grepprg=ack\ -ai
 
 
 """""""""""""""""
@@ -174,9 +176,9 @@ nnoremap ; :
 nnoremap j gj
 nnoremap k gk
 
-" Buffer next,previous (ctrl-{n,p})
-:noremap <c-n> :bn<CR>
-:noremap <c-p> :bp<CR>
+" error next,previous (ctrl-{n,p})
+:noremap <c-n> :cn<CR>
+:noremap <c-p> :cp<CR>
 " Buffer delete (ctrl-c)
 :noremap <c-q> :bd<CR>
 
@@ -230,6 +232,10 @@ let jslint_command_options = '-nofilelisting -nocontext -nosummary -nologo -conf
 augroup mkd " add markdown syntax
 	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
 augroup END
+
+" mustache
+autocmd VimEnter,BufNewFile,BufRead *.mustache set nofoldenable
+autocmd VimEnter,BufNewFile,BufRead *.js set foldmethod=manual
 
 
 """""""""""
