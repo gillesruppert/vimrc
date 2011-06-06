@@ -87,23 +87,25 @@ set title
 set laststatus=2
 set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()} " set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
 
-" set colorscheme depending on env
-set bg=dark
-
 " gvim don't display the menu or toolbar
 set guioptions-=m
 set guioptions-=T
 
+
 if has("gui_running")
+  " set colorscheme depending on env
+  set background=dark
 	"colorscheme my-wombat
-	colorscheme mustang
+	colorscheme solarized
 elseif &t_Co >= 256
   ":let g:CSApprox_loaded = 1
-  colorscheme mustang_term
+  " set colorscheme depending on env
+  set background=dark
+  colorscheme solarized
 endif
 
 " Font. Very important.
-set guifont="Meslo LG S DZ":h12
+set guifont="Meslo LG M DZ":h13
 
 if has('win32') || has('win64')
 	set guifont=Consolas:h13:cANSI
@@ -133,6 +135,12 @@ nmap <silent> <leader>sv :so $MYVIMRC<cr>
 " alt+n or alt+p to navigate between entries in QuickFix
 map <silent> <m-p> :cp <cr>
 map <silent> <m-n> :cn <cr>
+
+" tab shortcuts
+map <leader>te :tabnew<cr>
+map <leader>tn :tabNext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tc :tabclose<cr>
 
 " Gundo plugin
 map <F5> :GundoToggle<cr>
