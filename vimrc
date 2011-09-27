@@ -105,13 +105,13 @@ elseif &t_Co >= 256
 endif
 
 " Font. Very important.
-set guifont="Meslo LG M DZ":h13
-
-if has('win32') || has('win64')
-	set guifont=Consolas:h13:cANSI
-elseif has('unix')
-	let &guifont="Monospace:h13"
-endif
+" set guifont="Meslo LG M DZ":h13
+" 
+" if has('win32') || has('win64')
+" 	set guifont=Consolas:h13:cANSI
+" elseif has('unix')
+" 	let &guifont="Monospace:h13"
+" endif
 
 " set ack as the grep programme
 " set grepprg=ack\ -ai
@@ -123,6 +123,9 @@ au BufNewFile,BufRead *.spv set filetype=php "add filetype
 au BufNewFile,BufRead *.jqt set filetype=html "add filetype
 au BufNewFile,BufRead *.liquid set filetype=xhtml "add filetype
 au BufNewFile,BufRead *.json set filetype=json "add filetype
+" settings for folding comments
+au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
+
 
 
 """"""""""""""""""""
@@ -184,6 +187,10 @@ nnoremap ; :
 nnoremap j gj
 nnoremap k gk
 
+" remapping folds
+nnoremap zo zO
+nnoremap zO zo
+
 " error next,previous (ctrl-{n,p})
 :noremap <c-n> :cn<CR>
 :noremap <c-p> :cp<CR>
@@ -213,6 +220,10 @@ map <F8> :!~/.vim/utils/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Task
 inoremap <silent> <buffer> <C-D-CR> <ESC>:call Toggle_task_status()<CR>i
 noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
+
+" folds
+:noremap <leader>z f{zf%
+:noremap zx za
 
 
 """"""""""""""""
@@ -244,6 +255,15 @@ augroup END
 " mustache
 autocmd VimEnter,BufNewFile,BufRead *.mustache set nofoldenable
 autocmd VimEnter,BufNewFile,BufRead *.js set foldmethod=manual
+
+" gundo
+if !has("python")
+ let g:gundo_disable = 1
+endif
+
+"JavaScript Syntax
+let g:javascript_ignore_javaScriptdoc = 1
+
 
 
 """""""""""
