@@ -1,33 +1,51 @@
+" full vim
 set nocompatible " must be the first line
-" Needed on some linux distros.
-" see http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
-filetype off 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
-" set t_Co=256
+" pathogen
+filetype off 
+silent! call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
+filetype plugin indent on
 
 """""""""""""""""
 "general settings
 syntax on
-filetype on
-filetype plugin on
-filetype indent on
 let mapleader = ","
 
-" added word chars
-set iskeyword+=$
-" set iskeyword+=-
-set iskeyword+=_ 
+set scrolloff=3            " scroll 3 lines before bottom/top
+set autoread               " set to auto read when a file is changed from the outside
+set mouse=a                " allow for full mouse support
+set autowrite
+set showcmd                " display incomplete commands
+set hidden                 " allow buffer to be put in the background without saving
 
-" allow buffer to be put in the background without saving
-set hidden
+set spelllang=en,es                 " set spell check language
+set wildmenu               " show autocomplete menus
+set wildmode=list:longest,list:full " completion menu behaves more like cli
+set wildignore+=*.o,.git,.svn,node_modules
+
+set iskeyword+=$,_,-       " added word chars
+
+" show line number, cursor position
+set number
+set ruler
+set cursorline             " highlights the cursor line
+set nowrap
+set linebreak                       " this will not break whole words while wrap is enabled
+set showbreak=…
 
 " search settings
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
+set hlsearch               " highlight search things
+set incsearch              " go to search results as typing
+set smartcase              " but case-sensitive if expression contains a capital letter.
+set ignorecase             " ignore case when searching
+set gdefault               " assume global when searching or substituting
+set magic                  " set magic on, for regular expressions
+set showmatch              " show matching brackets when text indicator is over them
+
+set lazyredraw             " don't redraw screen during macros
+set ttyfast                " improves redrawing for newer computers
+set fileformats=unix,mac,dos
 
 " indent settings
 set autoindent
@@ -43,39 +61,39 @@ set smarttab
 " show line number, cursor position
 set number
 set ruler
-set cul " highlights the cursor line
+set cul                    " highlights the cursor line
+set backspace=start,indent,eol " set backspace to act like normal
 set nowrap
 set encoding=utf-8
 
-set visualbell " don't beep
-set noerrorbells " don't beep
+set visualbell             " don't beep
+set noerrorbells           " don't beep
+set noeb vb t_vb=          " disable audio and visual bells
+au GUIEnter * set vb t_vb=
 
 " do not create swap files!
 set nobackup
+set nowritebackup
 set noswapfile
 
 set pastetoggle=<F5>
 set listchars=tab:>-,trail:-,extends:#,nbsp:%
 set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 
-" set backspace to act like normal
-set backspace=start,indent,eol
+" vim 7.3 features
+if v:version >= 703
+    set undofile
+    set undodir=$HOME/.vim/.undo
+    set undolevels=1000
+    set undoreload=10000
+    set colorcolumn=115    " show a right margin column
+endif
 
-" scroll 3 lines before bottom/top
-set scrolloff=3
 
-" create a larger history
-set history=100
+set history=100 " create a larger history
 
 " hide files matching the pattern:
 let g:explHideFiles='^\.,.*\.pyc$'
-
-" show autocomplete menus
-set wildmenu
-set wildmode=list:longest " completion menu behaves more like cli
-
-" display incomplete commands
-set showcmd
 
 " show editing mode
 set showmode
@@ -86,32 +104,31 @@ set title
 " set status line
 set laststatus=2
 set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()} " set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
+"
+"display a warning if fileformat isnt unix
+set statusline+=%#warningmsg#
+set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+set statusline+=%*
+
+"display a warning if file encoding isnt utf-8
+set statusline+=%#warningmsg#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
 
 " gvim don't display the menu or toolbar
 set guioptions-=m
 set guioptions-=T
 
 
-if has("gui_running")
-  " set colorscheme depending on env
-  set background=dark
-	"colorscheme my-wombat
-	colorscheme solarized
-elseif &t_Co >= 256
-  ":let g:CSApprox_loaded = 1
-  " set colorscheme depending on env
-  set background=dark
-  colorscheme solarized
-endif
+"""""" colour scheme
+" set t_Co=256
+set background=dark
+colorscheme solarized
 
-" Font. Very important.
-" set guifont="Meslo LG M DZ":h13
-" 
-" if has('win32') || has('win64')
-" 	set guifont=Consolas:h13:cANSI
-" elseif has('unix')
-" 	let &guifont="Monospace:h13"
-" endif
+" folding
+set foldenable                   " enable folding
+set foldmethod=marker            " detect triple-{ style fold markers
+set foldlevel=99
 
 " set ack as the grep programme
 " set grepprg=ack\ -ai
@@ -119,12 +136,14 @@ endif
 
 """""""""""""""""
 " added filetypes
-au BufNewFile,BufRead *.spv set filetype=php "add filetype
-au BufNewFile,BufRead *.jqt set filetype=html "add filetype
-au BufNewFile,BufRead *.liquid set filetype=xhtml "add filetype
-au BufNewFile,BufRead *.json set filetype=json "add filetype
+au BufNewFile,BufRead *.spv set filetype=php
+au BufNewFile,BufRead *.jqt set filetype=html
+au BufNewFile,BufRead *.liquid set filetype=xhtml
+au BufNewFile,BufRead *.json set filetype=json
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
+" HTML
+au FileType html,php,xhtml,jsp,ejs let b:delimitMate_matchpairs = "(:),[:],{:}"
 
 
 
@@ -133,6 +152,11 @@ au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*
 " edit and save .vimrc quickly
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
+
+" map Y to match C and D behavior
+nnoremap Y y$
+" yank entire file (global yank)
+nmap gy ggVGy
 
 " added for ruby and rails
 " alt+n or alt+p to navigate between entries in QuickFix
@@ -144,6 +168,23 @@ map <leader>te :tabnew<cr>
 map <leader>tn :tabNext<cr>
 map <leader>tp :tabprevious<cr>
 map <leader>tc :tabclose<cr>
+
+" auto complete {} indent and position the cursor in the middle line
+inoremap {<cr>  {<cr>}<esc>o
+inoremap (<CR>  (<CR>)<Esc>O
+inoremap [<CR>  [<CR>]<Esc>O
+
+" fast window switching
+map <leader>w <C-W>w
+" cycle between buffers
+map <leader>. :b#<cr>
+
+" pull word under cursor into lhs of a substitute (for quick search and replace)
+" nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
+" strip all trailing whitespace in the current file
+" nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
+" insert path of current file into a command
+" cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Gundo plugin
 map <F5> :GundoToggle<cr>
@@ -237,6 +278,15 @@ noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
 " automatically close tag as needed
 "au Filetype html,xml,xsl,php,spv,phtml source $HOME/.vim/scripts/closetag.vim
 
+" Command-T
+let g:CommandTMaxHeight=20
+
+" Ack
+set grepprg=ack
+nnoremap <leader>a :Ack<space>
+let g:ackhighlight=1
+let g:ackprg="ack-grep -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
+
 " Change which file opens after executing :Rails command
 let g:rails_default_file='config/database.yml'
 
@@ -302,3 +352,17 @@ endfunc
 " put swp files into the tmp dir rather than next to the file!
 "set backupdir=$HOME/.vim-tmp,$HOME/.tmp,$HOME/tmp,/var/tmp,/tmp
 "set directory=$HOME/.vim-tmp,$HOME/.tmp,$HOME/tmp,/var/tmp,/tmp
+
+" if has("gui_running")
+" elseif &t_Co >= 256
+" endif
+
+" Font. Very important.
+" set guifont="Meslo LG M DZ":h13
+" 
+" if has('win32') || has('win64')
+" 	set guifont=Consolas:h13:cANSI
+" elseif has('unix')
+" 	let &guifont="Monospace:h13"
+" endif
+
