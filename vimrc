@@ -209,6 +209,12 @@ map <c-c>h <c-w>h<c-w>c<c-w>l
 
 " nerd tree
 map <leader>d :NERDTreeToggle<CR>
+map <leader>nf :NERDTreeFind<CR>
+map <leader>nm :NERDTreeMirror<CR>
+map <leader>d :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen=1
+let g:NERDChristmasTree=1
+let g:NERDTreeShowHidden=1
 
 " show invisible chars
 nmap <silent> <leader>i :set nolist!<CR>
