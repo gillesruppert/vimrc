@@ -170,7 +170,7 @@ map <leader>tp :tabprevious<cr>
 map <leader>tc :tabclose<cr>
 
 " auto complete {} indent and position the cursor in the middle line
-inoremap {<cr>  {<cr>}<esc>o
+inoremap {<cr>  {<cr>}<esc>O
 inoremap (<CR>  (<CR>)<Esc>O
 inoremap [<CR>  [<CR>]<Esc>O
 
