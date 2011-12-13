@@ -2,7 +2,7 @@
 set nocompatible " must be the first line
 
 " pathogen
-filetype off 
+filetype off
 silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
 filetype plugin indent on
@@ -24,14 +24,14 @@ set wildmenu               " show autocomplete menus
 set wildmode=list:longest,list:full " completion menu behaves more like cli
 set wildignore+=*.o,.git,.svn,node_modules
 
-set iskeyword+=$,_,-       " added word chars
+set iskeyword+=$,_         " added word chars
 
 " show line number, cursor position
 set number
 set ruler
 set cursorline             " highlights the cursor line
 set nowrap
-set linebreak                       " this will not break whole words while wrap is enabled
+set linebreak              " this will not break whole words while wrap is enabled
 set showbreak=…
 
 " search settings
@@ -86,7 +86,7 @@ if v:version >= 703
     set undodir=$HOME/.vim/.undo
     set undolevels=1000
     set undoreload=10000
-    set colorcolumn=115    " show a right margin column
+    set colorcolumn=80    " show a right margin column
 endif
 
 
@@ -140,11 +140,12 @@ au BufNewFile,BufRead *.spv set filetype=php
 au BufNewFile,BufRead *.jqt set filetype=html
 au BufNewFile,BufRead *.liquid set filetype=xhtml
 au BufNewFile,BufRead *.json set filetype=json
+
+
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
 " HTML
 au FileType html,php,xhtml,jsp,ejs let b:delimitMate_matchpairs = "(:),[:],{:}"
-
 
 
 """"""""""""""""""""
@@ -158,7 +159,6 @@ nnoremap Y y$
 " yank entire file (global yank)
 nmap gy ggVGy
 
-" added for ruby and rails
 " alt+n or alt+p to navigate between entries in QuickFix
 map <silent> <m-p> :cp <cr>
 map <silent> <m-n> :cn <cr>
@@ -170,9 +170,9 @@ map <leader>tp :tabprevious<cr>
 map <leader>tc :tabclose<cr>
 
 " auto complete {} indent and position the cursor in the middle line
-inoremap {<cr>  {<cr>}<esc>O
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap [<CR>  [<CR>]<Esc>O
+"inoremap {<cr>  {<cr>}<esc>O
+"inoremap (<CR>  (<CR>)<Esc>O
+"inoremap [<CR>  [<CR>]<Esc>O
 
 " fast window switching
 map <leader>w <C-W>w
@@ -180,11 +180,16 @@ map <leader>w <C-W>w
 map <leader>. :b#<cr>
 
 " pull word under cursor into lhs of a substitute (for quick search and replace)
-" nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
+nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
+
 " strip all trailing whitespace in the current file
-" nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
+nnoremap mw <leader>W :%s/\s\+$//e<cr> :let @/=''<CR>
+" strip all trailing whitespace in JS files
+" autocmd BufWritePre *.js :%s/\s\+$//e
+
+
 " insert path of current file into a command
-" cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Gundo plugin
 map <F5> :GundoToggle<cr>
@@ -228,6 +233,10 @@ nnoremap ; :
 nnoremap j gj
 nnoremap k gk
 
+" folds
+:noremap <leader>z f{zf%
+:noremap zx za
+
 " remapping folds
 nnoremap zo zO
 nnoremap zO zo
@@ -239,9 +248,9 @@ nnoremap zO zo
 :noremap <c-q> :bd<CR>
 
 " remap going through windows
-map <c-j> <c-w>j 
-map <c-k> <c-w>k 
-map <c-l> <c-w>l 
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
 map <c-h> <c-w>h
 map <c-c>j <c-w>j<c-w>c<c-w>k
 map <c-c>k <c-w>k<c-w>c<c-w>j
@@ -252,10 +261,9 @@ map <c-c>h <c-w>h<c-w>c<c-w>l
 map <leader>d :NERDTreeToggle<CR>
 map <leader>nf :NERDTreeFind<CR>
 map <leader>nm :NERDTreeMirror<CR>
-map <leader>d :NERDTreeToggle<CR>
-let g:NERDTreeQuitOnOpen=1
+"let g:NERDTreeQuitOnOpen=1
 let g:NERDChristmasTree=1
-let g:NERDTreeShowHidden=1
+"let g:NERDTreeShowHidden=1
 
 " show invisible chars
 nmap <silent> <leader>i :set nolist!<CR>
@@ -267,10 +275,6 @@ map <F8> :!~/.vim/utils/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Task
 inoremap <silent> <buffer> <C-D-CR> <ESC>:call Toggle_task_status()<CR>i
 noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
-
-" folds
-:noremap <leader>z f{zf%
-:noremap zx za
 
 
 """"""""""""""""
@@ -285,7 +289,8 @@ let g:CommandTMaxHeight=20
 set grepprg=ack
 nnoremap <leader>a :Ack<space>
 let g:ackhighlight=1
-let g:ackprg="ack-grep -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
+" let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
+let g:ackprg="ack -H --column --nocolor --nogroup"
 
 " Change which file opens after executing :Rails command
 let g:rails_default_file='config/database.yml'
@@ -298,10 +303,6 @@ let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:functi
 " Easy Grep options
 let g:EasyGrepMode = 2
 let g:EasyGrepRecursive = 1
-
-" JavaScriptLint
-let jslint_command = '~/.vim/jsl-0.3.0-mac/jsl'
-let jslint_command_options = '-nofilelisting -nocontext -nosummary -nologo -conf ~/.vim/jsl-0.3.0-mac/jsl.conf -process'
 
 " Markdown
 augroup mkd " add markdown syntax
@@ -348,21 +349,3 @@ endfunc
 " highlight lines that are longer than 80 chars
 " highlight OverLength guifg=#ffffff guibg=#740100 gui=NONE
 " match OverLength /\%81v.\+/
-
-" put swp files into the tmp dir rather than next to the file!
-"set backupdir=$HOME/.vim-tmp,$HOME/.tmp,$HOME/tmp,/var/tmp,/tmp
-"set directory=$HOME/.vim-tmp,$HOME/.tmp,$HOME/tmp,/var/tmp,/tmp
-
-" if has("gui_running")
-" elseif &t_Co >= 256
-" endif
-
-" Font. Very important.
-" set guifont="Meslo LG M DZ":h13
-" 
-" if has('win32') || has('win64')
-" 	set guifont=Consolas:h13:cANSI
-" elseif has('unix')
-" 	let &guifont="Monospace:h13"
-" endif
-
