@@ -163,12 +163,6 @@ nmap gy ggVGy
 map <silent> <m-p> :cp <cr>
 map <silent> <m-n> :cn <cr>
 
-" tab shortcuts
-map <leader>te :tabnew<cr>
-map <leader>tn :tabNext<cr>
-map <leader>tp :tabprevious<cr>
-map <leader>tc :tabclose<cr>
-
 " auto complete {} indent and position the cursor in the middle line
 "inoremap {<cr>  {<cr>}<esc>O
 "inoremap (<CR>  (<CR>)<Esc>O
@@ -182,11 +176,18 @@ map <leader>. :b#<cr>
 " pull word under cursor into lhs of a substitute (for quick search and replace)
 nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
 
-" strip all trailing whitespace in the current file
-nnoremap mw <leader>W :%s/\s\+$//e<cr> :let @/=''<CR>
-" strip all trailing whitespace in JS files
-" autocmd BufWritePre *.js :%s/\s\+$//e
+" format json
+autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
 
+" strip all trailing whitespace 
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+
+autocmd FileType c,cpp,python,ruby,java,html,css,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " insert path of current file into a command
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
