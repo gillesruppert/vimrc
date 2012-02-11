@@ -144,8 +144,6 @@ au BufNewFile,BufRead *.json set filetype=json
 
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
-" HTML
-au FileType html,php,xhtml,jsp,ejs let b:delimitMate_matchpairs = "(:),[:],{:}"
 
 
 """"""""""""""""""""
@@ -162,11 +160,6 @@ nmap gy ggVGy
 " alt+n or alt+p to navigate between entries in QuickFix
 map <silent> <m-p> :cp <cr>
 map <silent> <m-n> :cn <cr>
-
-" auto complete {} indent and position the cursor in the middle line
-"inoremap {<cr>  {<cr>}<esc>O
-"inoremap (<CR>  (<CR>)<Esc>O
-"inoremap [<CR>  [<CR>]<Esc>O
 
 " fast window switching
 map <leader>w <C-W>w
@@ -337,46 +330,10 @@ let g:syntastic_auto_loc_list=1 " open close location list automatically
                            "\ 'active_filetypes': ['ruby', 'php'],
                            "\ 'passive_filetypes': ['html', 'jqt'] }
 
-" check whether there is a .jshintrc or jshintrc in the current working
-" directory or a parent directory. If yes, it sets it to the syntastic jshint
-" config. else nothing happens.
-" The code that is walking up the tree is copied and adapted from
-" the ctrlp extension. All of this should probably be in an external file and
-" tidied up, but I was just happy to get it running in the 1st place.
-" As they say: "It ain't pretty but it works..."
-fu! s:lash()
-	retu &ssl || !exists('+ssl') ? '/' : '\'
-endf
+" call the jshint config loader script for syntastic
+:autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
 
-fu! s:glbpath(...)
-	let cond = v:version > 702 || ( v:version == 702 && has('patch051') )
-	retu call('globpath', cond ? a:000 : a:000[:1])
-endf
-
-fu! s:getparent(item)
-	let parent = substitute(a:item, '[\/][^\/]\+[\/:]\?$', '', '')
-  if parent == '' || match(parent, '[\/]') < 0
-    let parent .= s:lash()
-  en
-	retu parent
-endf
-
-fu! s:findroot(curr, config, depth, type)
-	let [depth, notfound] = [a:depth + 1, empty(s:glbpath(a:curr, a:config, 1))]
-	if !notfound
-    let g:syntastic_javascript_jshint_conf = a:curr . '/' . a:config
-	el
-		let parent = s:getparent(a:curr)
-		if parent != a:curr | cal s:findroot(parent, a:config, depth, a:type) | en
-	en
-endf
-
-let configs = ['.jshintrc', 'jshintrc']
-for config in configs
-  call s:findroot(getcwd(), config, 0, 0)
-  if exists('s:foundconfig') | break | endif
-endfor
-unlet! s:foundconfig
+:autocmd FileType python set expandtab
 
 """""""""""
 " vim tools
