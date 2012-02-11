@@ -103,8 +103,8 @@ set title
 
 " set status line
 set laststatus=2
-set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()} " set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
-"
+set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()}
+
 "display a warning if fileformat isnt unix
 set statusline+=%#warningmsg#
 set statusline+=%{&ff!='unix'?'['.&ff.']':''}
@@ -136,9 +136,8 @@ set foldlevel=99
 
 """""""""""""""""
 " added filetypes
-au BufNewFile,BufRead *.spv set filetype=php
 au BufNewFile,BufRead *.jqt set filetype=html
-au BufNewFile,BufRead *.liquid set filetype=xhtml
+au BufNewFile,BufRead *.liquid set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
 
 
@@ -255,7 +254,6 @@ map <c-c>h <c-w>h<c-w>c<c-w>l
 map <leader>d :NERDTreeToggle<CR>
 map <leader>nf :NERDTreeFind<CR>
 map <leader>nm :NERDTreeMirror<CR>
-"let g:NERDTreeQuitOnOpen=1
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
@@ -342,3 +340,6 @@ imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
 
 " Python settings
 :autocmd FileType python set expandtab
+
+" insert the current working directory
+iabbrev <silent> CWD <C-R>=getcwd()<CR>
