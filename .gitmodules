@@ -49,9 +49,6 @@
 [submodule "bundle/php.vim-html-enhanced"]
 	path = bundle/php.vim-html-enhanced
 	url = https://github.com/vim-scripts/php.vim-html-enhanced.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
