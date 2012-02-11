@@ -52,9 +52,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/jshint"]
-	path = bundle/jshint
-	url = git@github.com:gillesruppert/jshint.vim.git
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
