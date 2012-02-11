@@ -287,11 +287,16 @@ noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
 let g:CommandTMaxHeight=20
 
 " Ack
-set grepprg=ack
-nnoremap <leader>a :Ack<space>
-let g:ackhighlight=1
+" set grepprg=ack
+" nnoremap <leader>a :Ack<space>
+" let g:ackhighlight=1
 " let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
-let g:ackprg="ack -H --column --nocolor --nogroup"
+" let g:ackprg="ack -H --column --nocolor --nogroup"
+
+" Easy Grep options
+" let g:EasyGrepMode = 2
+" let g:EasyGrepRecursive = 1
+
 
 " Change which file opens after executing :Rails command
 let g:rails_default_file='config/database.yml'
@@ -300,10 +305,6 @@ let g:rails_default_file='config/database.yml'
 let Tlist_Ctags_Cmd = '~/.vim/utils/ctags' " set path to ctags utility
 let Tlist_WinWidth = 50
 let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
-
-" Easy Grep options
-let g:EasyGrepMode = 2
-let g:EasyGrepRecursive = 1
 
 " Markdown
 augroup mkd " add markdown syntax
@@ -329,24 +330,5 @@ let g:javascript_ignore_javaScriptdoc = 1
 " create a uuid
 imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
 
-" show hightlighting groups for current word
-nmap <leader>sh :call <sid>SynStack()<cr>
-function <sid>SynStack()
-	if !exists("*synstack")
-		return
-	endif
-	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-" run file with PHP CLI (CTRL-M)
-:autocmd FileType php noremap <c-m> :w!<CR>:!/usr/bin/php %<CR>
-
-" PHP parser check
-:autocmd FileType php noremap <c-a> :!/usr/bin/php -l %<CR>
-
 " Python settings
 :autocmd FileType python set expandtab
-
-" highlight lines that are longer than 80 chars
-" highlight OverLength guifg=#ffffff guibg=#740100 gui=NONE
-" match OverLength /\%81v.\+/
