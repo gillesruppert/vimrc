@@ -14,11 +14,7 @@ install:
 
 update:
 	@git submodule foreach git pull origin master
-	@make -s command-t
 	@make -s pathogen
-
-command-t:
-	@cd ${PWD}/bundle/command-t && rake clean && rake make
 
 pathogen:
 	@cd ${PWD}/autoload && curl -so ./pathogen.vim \

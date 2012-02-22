@@ -14,7 +14,7 @@ let mapleader = ","
 
 set scrolloff=3            " scroll 3 lines before bottom/top
 set autoread               " set to auto read when a file is changed from the outside
-set mouse=a                " allow for full mouse support
+"set mouse=a                " allow for full mouse support
 set autowrite
 set showcmd                " display incomplete commands
 set hidden                 " allow buffer to be put in the background without saving
@@ -118,6 +118,9 @@ set statusline+=%*
 " gvim don't display the menu or toolbar
 set guioptions-=m
 set guioptions-=T
+" gvim don't show scrollbars
+set guioptions-=r
+set guioptions-=L
 
 
 """""" colour scheme
@@ -130,13 +133,11 @@ set foldenable                   " enable folding
 set foldmethod=marker            " detect triple-{ style fold markers
 set foldlevel=99
 
-" set ack as the grep programme
-" set grepprg=ack\ -ai
-
 
 """""""""""""""""
 " added filetypes
 au BufNewFile,BufRead *.jqt set filetype=html
+au BufNewFile,BufRead *.scss set filetype=css
 au BufNewFile,BufRead *.liquid set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
 
@@ -183,9 +184,6 @@ autocmd FileType c,cpp,python,ruby,java,html,css,json,javascript autocmd BufWrit
 
 " insert path of current file into a command
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-" Gundo plugin
-map <F5> :GundoToggle<cr>
 
 " save with ,,
 inoremap <leader>, <esc>:w<cr>
@@ -250,12 +248,6 @@ map <c-c>k <c-w>k<c-w>c<c-w>j
 map <c-c>l <c-w>l<c-w>c<c-w>h
 map <c-c>h <c-w>h<c-w>c<c-w>l
 
-" nerd tree
-map <leader>d :NERDTreeToggle<CR>
-map <leader>nf :NERDTreeFind<CR>
-map <leader>nm :NERDTreeMirror<CR>
-let g:NERDChristmasTree=1
-"let g:NERDTreeShowHidden=1
 
 " show invisible chars
 nmap <silent> <leader>i :set nolist!<CR>
@@ -274,6 +266,21 @@ noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
 " automatically close tag as needed
 "au Filetype html,xml,xsl,php,spv,phtml source $HOME/.vim/scripts/closetag.vim
 
+" nerd tree
+map <leader>d :NERDTreeToggle<CR>
+map <leader>nf :NERDTreeFind<CR>
+map <leader>nm :NERDTreeMirror<CR>
+let g:NERDChristmasTree=1
+"let g:NERDTreeShowHidden=1
+
+" Gundo plugin
+map <F5> :GundoToggle<cr>
+
+" fugitive
+map <leader>gs :Gstatus<cr>
+map <leader>gl :Glog<cr>
+map <leader>gd :Gdiff<cr>
+
 " Command-T
 let g:CommandTMaxHeight=20
 
@@ -285,8 +292,12 @@ let g:CommandTMaxHeight=20
 " let g:ackprg="ack -H --column --nocolor --nogroup"
 
 " Easy Grep options
+let g:EasyGrepInvertWholeWord=1 " ,vv searches for whole word
 " let g:EasyGrepMode = 2
 " let g:EasyGrepRecursive = 1
+
+" set ack as the grep programme
+" set grepprg=ack\ -ai
 
 
 " Change which file opens after executing :Rails command
@@ -323,7 +334,7 @@ let g:ctrlp_custom_ignore = {
 
 "Syntastic settings
 let g:syntastic_javascript_checker="jshint"
-let g:syntastic_auto_loc_list=1 " open close location list automatically
+let g:syntastic_auto_loc_list=2 " close location list automatically
 "let g:syntastic_mode_map = { 'mode': 'active',
                            "\ 'active_filetypes': ['ruby', 'php'],
                            "\ 'passive_filetypes': ['html', 'jqt'] }
