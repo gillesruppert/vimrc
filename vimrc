@@ -22,7 +22,7 @@ set hidden                 " allow buffer to be put in the background without sa
 set spelllang=en,es                 " set spell check language
 set wildmenu               " show autocomplete menus
 set wildmode=list:longest,list:full " completion menu behaves more like cli
-set wildignore+=*.o,.git,.svn,node_modules
+set wildignore+=*.o
 
 set iskeyword+=$,_         " added word chars
 
@@ -130,7 +130,7 @@ colorscheme solarized
 
 " folding
 set foldenable                   " enable folding
-set foldmethod=marker            " detect triple-{ style fold markers
+set foldmethod=manual            " detect triple-{ style fold markers
 set foldlevel=99
 
 
@@ -228,9 +228,6 @@ nnoremap k gk
 :noremap <leader>z f{zf%
 :noremap zx za
 
-" remapping folds
-nnoremap zo zO
-nnoremap zO zo
 
 " error next,previous (ctrl-{n,p})
 :noremap <c-n> :cn<CR>
@@ -253,12 +250,12 @@ map <c-c>h <c-w>h<c-w>c<c-w>l
 nmap <silent> <leader>i :set nolist!<CR>
 
 " taglist
-map <leader>l :TlistToggle<CR>
-map <F8> :!~/.vim/utils/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <leader>l :TlistToggle<cr>
+map <F8> :!~/.vim/utils/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 
 " Task
-inoremap <silent> <buffer> <C-D-CR> <ESC>:call Toggle_task_status()<CR>i
-noremap <silent> <buffer> <C-D-CR> :call Toggle_task_status()<CR>
+inoremap <silent> <buffer> <c-d-cr> <esc>:call Toggle_task_status()<cr>i
+noremap <silent> <buffer> <c-d-cr> :call Toggle_task_status()<cr>
 
 
 """"""""""""""""
@@ -274,30 +271,25 @@ let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
 " Gundo plugin
-map <F5> :GundoToggle<cr>
+map <F6> :GundoToggle<cr>
 
 " fugitive
 map <leader>gs :Gstatus<cr>
 map <leader>gl :Glog<cr>
 map <leader>gd :Gdiff<cr>
 
-" Command-T
-let g:CommandTMaxHeight=20
-
 " Ack
-" set grepprg=ack
-" nnoremap <leader>a :Ack<space>
-" let g:ackhighlight=1
+" set grepprg=ack\ -ai " set ack as the grep programme
 " let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
 " let g:ackprg="ack -H --column --nocolor --nogroup"
 
+nnoremap <leader>a :Ack<space>
+let g:ackhighlight=1
+
 " Easy Grep options
 let g:EasyGrepInvertWholeWord=1 " ,vv searches for whole word
-" let g:EasyGrepMode = 2
-" let g:EasyGrepRecursive = 1
-
-" set ack as the grep programme
-" set grepprg=ack\ -ai
+"let g:EasyGrepMode = 2
+"let g:EasyGrepRecursive = 1
 
 
 " Change which file opens after executing :Rails command
@@ -315,7 +307,7 @@ augroup END
 
 " mustache
 autocmd VimEnter,BufNewFile,BufRead *.mustache set nofoldenable
-autocmd VimEnter,BufNewFile,BufRead *.js set foldmethod=manual
+"autocmd VimEnter,BufNewFile,BufRead *.js set foldmethod=manual
 
 " gundo
 if !has("python")
@@ -342,15 +334,19 @@ let g:syntastic_auto_loc_list=2 " close location list automatically
 " call the jshint config loader script for syntastic
 :autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
 
+" Python settings
 :autocmd FileType python set expandtab
+:autocmd FileType python set shiftwidth=4
+:autocmd FileType python set tabstop=4
+:autocmd FileType python set softtabstop=4
 
 """""""""""
 " vim tools
 " create a uuid
 imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
 
-" Python settings
-:autocmd FileType python set expandtab
+"refresh browser"
+nnoremap <F5> :silent execute "!python $HOME/.vim/utils/browserrefresh.py"<cr>
 
 " insert the current working directory
-iabbrev <silent> CWD <C-R>=getcwd()<CR>
+iabbrev <silent> CWD <c-r>=getcwd()<cr>
