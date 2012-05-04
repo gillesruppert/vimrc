@@ -22,7 +22,7 @@ set hidden                 " allow buffer to be put in the background without sa
 set spelllang=en,es                 " set spell check language
 set wildmenu               " show autocomplete menus
 set wildmode=list:longest,list:full " completion menu behaves more like cli
-set wildignore+=*.o
+set wildignore+=*.o,tags,Session.vim
 
 set iskeyword+=$,_         " added word chars
 
@@ -157,10 +157,6 @@ nnoremap Y y$
 " yank entire file (global yank)
 nmap gy ggVGy
 
-" alt+n or alt+p to navigate between entries in QuickFix
-map <silent> <m-p> :cp <cr>
-map <silent> <m-n> :cn <cr>
-
 " fast window switching
 map <leader>w <C-W>w
 " cycle between buffers
@@ -225,13 +221,15 @@ nnoremap j gj
 nnoremap k gk
 
 " folds
-:noremap <leader>z f{zf%
+:noremap <leader>zz zf%
+:noremap <leader>zf f{zf%
 :noremap zx za
 
 
 " error next,previous (ctrl-{n,p})
-:noremap <c-n> :cn<CR>
-:noremap <c-p> :cp<CR>
+:noremap <c-n> :cn<cr>
+:noremap <c-p> :cp<cr>
+
 " Buffer delete (ctrl-c)
 :noremap <c-q> :bd<CR>
 
@@ -250,8 +248,7 @@ map <c-c>h <c-w>h<c-w>c<c-w>l
 nmap <silent> <leader>i :set nolist!<CR>
 
 " taglist
-map <leader>l :TlistToggle<cr>
-map <F8> :!~/.vim/utils/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
+nmap <F8> :TagbarToggle<CR>
 
 " Task
 inoremap <silent> <buffer> <c-d-cr> <esc>:call Toggle_task_status()<cr>i
@@ -260,9 +257,6 @@ noremap <silent> <buffer> <c-d-cr> :call Toggle_task_status()<cr>
 
 """"""""""""""""
 " Plugin settings
-" automatically close tag as needed
-"au Filetype html,xml,xsl,php,spv,phtml source $HOME/.vim/scripts/closetag.vim
-
 " nerd tree
 map <leader>d :NERDTreeToggle<CR>
 map <leader>nf :NERDTreeFind<CR>
@@ -280,10 +274,10 @@ map <leader>gd :Gdiff<cr>
 
 " Ack
 " set grepprg=ack\ -ai " set ack as the grep programme
-" let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
-" let g:ackprg="ack -H --column --nocolor --nogroup"
+let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
 
 nnoremap <leader>a :Ack<space>
+map <leader>c :Ack <c-R>"<space><cr>
 let g:ackhighlight=1
 
 " Easy Grep options
@@ -333,6 +327,9 @@ let g:syntastic_auto_loc_list=2 " close location list automatically
 
 " call the jshint config loader script for syntastic
 :autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
+
+" surround plugin
+autocmd FileType php let b:surround_45 = "<?php \r ?>"
 
 " Python settings
 :autocmd FileType python set expandtab
