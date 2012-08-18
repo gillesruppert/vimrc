@@ -79,3 +79,9 @@
 [submodule "bundle/zencoding-vim"]
 	path = bundle/zencoding-vim
 	url = https://github.com/mattn/zencoding-vim.git
+[submodule "bundle/localvimrc"]
+	path = bundle/localvimrc
+	url = https://github.com/vim-scripts/localvimrc.git
+[submodule "bundle/vim-stylus"]
+	path = bundle/vim-stylus
+	url = git://github.com/wavded/vim-stylus.git
