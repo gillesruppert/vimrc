@@ -85,3 +85,6 @@
 [submodule "bundle/vim-stylus"]
 	path = bundle/vim-stylus
 	url = git://github.com/wavded/vim-stylus.git
+[submodule "bundle/cocoa"]
+	path = bundle/cocoa
+	url = git://github.com/msanders/cocoa.vim.git
