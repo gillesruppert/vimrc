@@ -353,9 +353,10 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
 
 "refresh browser"
-nnoremap <F5> :silent execute "!python $HOME/.vim/utils/browserrefresh.py &"<cr>
+nnoremap <F5> :silent execute "!python $HOME/.vim/utils/browserrefresh.py &"<cr> :redraw!<cr>
 
 " run npm tests
+"nnoremap <leader>t :silent !npm test<cr>:redraw!<cr>
 nnoremap <leader>t :!npm test<cr>
 
 " insert the current working directory
