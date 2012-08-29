@@ -269,6 +269,10 @@ map <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
+"localvimrc
+"let g:localvimrc_sandbox=0
+let g:localvimrc_ask=0
+
 " Gundo plugin
 map <F6> :GundoToggle<cr>
 
