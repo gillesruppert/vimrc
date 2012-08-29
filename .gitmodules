@@ -88,3 +88,6 @@
 [submodule "bundle/cocoa"]
 	path = bundle/cocoa
 	url = git://github.com/msanders/cocoa.vim.git
+[submodule "bundle/vim-twig"]
+	path = bundle/vim-twig
+	url = git://github.com/beyondwords/vim-twig.git
