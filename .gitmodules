@@ -91,3 +91,15 @@
 [submodule "bundle/vim-twig"]
 	path = bundle/vim-twig
 	url = git://github.com/beyondwords/vim-twig.git
+[submodule "bundle/vim-less"]
+	path = bundle/vim-less
+	url = git://github.com/groenewege/vim-less.git
+[submodule "bundle/puppet"]
+	path = bundle/puppet
+	url = git://github.com/rodjek/vim-puppet.git
+[submodule "bundle/jscomplete"]
+	path = bundle/jscomplete
+	url = git://github.com/teramako/jscomplete-vim.git
+[submodule "bundle/node-js-complete"]
+	path = bundle/node-js-complete
+	url = git://github.com/myhere/vim-nodejs-complete.git

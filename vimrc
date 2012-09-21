@@ -140,9 +140,10 @@ set foldlevel=99
 
 """""""""""""""""
 " added filetypes
-au BufNewFile,BufRead *.jqt set filetype=html
 au BufNewFile,BufRead *.scss set filetype=css
 au BufNewFile,BufRead *.liquid set filetype=html
+au BufNewFile,BufRead *.jqt set filetype=html
+au BufNewFile,BufRead *.twig set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
 
 " settings for folding comments
@@ -235,6 +236,9 @@ nnoremap k gk
 :noremap <c-n> :cn<cr>
 :noremap <c-p> :cp<cr>
 
+" ctrlp plugin (because c-p is used for other things)
+:noremap <c-f> :CtrlP<cr>
+
 " Buffer delete (ctrl-c)
 :noremap <c-q> :bd<CR>
 
@@ -281,10 +285,20 @@ map <leader>gs :Gstatus<cr>
 map <leader>gl :Glog<cr>
 map <leader>gd :Gdiff<cr>
 
+" jscomplete 
+autocmd FileType javascript
+  \ :setl omnifunc=jscomplete#CompleteJS
+
+let g:jscomplete_use = ['dom', 'moz']
+
+" nodejs complete
+let g:node_usejscomplete=1
+
+
 " Ack
 " set grepprg=ack\ -ai " set ack as the grep programme
 "let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
-let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!build\.).)*'"
+let g:ackprg="ack -a -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!build\.).)*'"
 
 nnoremap <leader>a :Ack<space>
 map <leader>c :Ack <c-R>"<space><cr>
