@@ -129,7 +129,8 @@ set guioptions-=L
 set background=dark
 colorscheme solarized
 if has('gui_running')
-  set guifont=Meslo\ LG\ S\ DZ:h14
+  "set guifont=Meslo\ LG\ S\ DZ:h14
+  set guifont=Source\ Code\ Pro:h14
 endif
 
 " folding
