@@ -15,12 +15,13 @@ let mapleader = ","
 
 set scrolloff=3            " scroll 3 lines before bottom/top
 set autoread               " set to auto read when a file is changed from the outside
-"set mouse=a                " allow for full mouse support
+set mouse=a               " allow for full mouse support
 set autowrite
 set showcmd                " display incomplete commands
 set hidden                 " allow buffer to be put in the background without saving
 
-set spelllang=en,es                 " set spell check language
+set spelllang=en           " set spell check language
+
 set wildmenu               " show autocomplete menus
 set wildmode=list:longest,list:full " completion menu behaves more like cli
 set wildignore+=*.o,tags,Session.vim
@@ -34,17 +35,19 @@ set cursorline             " highlights the cursor line
 set nowrap
 set linebreak              " this will not break whole words while wrap is enabled
 set showbreak=…
+set backspace=start,indent,eol " set backspace to act like normal
+set encoding=utf-8
 
 " search settings
 set hlsearch               " highlight search things
 set incsearch              " go to search results as typing
-set smartcase              " but case-sensitive if expression contains a capital letter.
 set ignorecase             " ignore case when searching
+set smartcase              " but case-sensitive if expression contains a capital letter.
 set gdefault               " assume global when searching or substituting
 set magic                  " set magic on, for regular expressions
 set showmatch              " show matching brackets when text indicator is over them
 
-set lazyredraw             " don't redraw screen during macros
+"set lazyredraw             " don't redraw screen during macros
 set ttyfast                " improves redrawing for newer computers
 set fileformats=unix,mac,dos
 
@@ -59,14 +62,7 @@ set softtabstop=2
 set expandtab
 set smarttab
 
-" show line number, cursor position
-set number
-set ruler
-set cul                    " highlights the cursor line
-set backspace=start,indent,eol " set backspace to act like normal
-set nowrap
-set encoding=utf-8
-
+" be quiet
 set visualbell             " don't beep
 set noerrorbells           " don't beep
 set noeb vb t_vb=          " disable audio and visual bells
@@ -119,12 +115,13 @@ set statusline+=%*
 " gvim don't display the menu or toolbar
 set guioptions-=m
 set guioptions-=T
+
 " gvim don't show scrollbars
 set guioptions-=r
 set guioptions-=L
 
 
-"""""" colour scheme
+"""""" colour scheme & fonts
 " set t_Co=256
 set background=dark
 colorscheme solarized
@@ -146,6 +143,10 @@ au BufNewFile,BufRead *.liquid set filetype=html
 au BufNewFile,BufRead *.jqt set filetype=html
 au BufNewFile,BufRead *.twig set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
+" Markdown
+autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:> ft=markdown
+autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+
 
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
@@ -157,56 +158,22 @@ au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
 
-
-" map Y to match C and D behavior
-nnoremap Y y$
-" yank entire file (global yank)
-nmap gy ggVGy
-
-" fast window switching
-map <leader>w <C-W>w
-" cycle between buffers
-map <leader>. :b#<cr>
+nnoremap Y y$                  " map Y to match C and D behavior
+nmap gy ggVGy                  " yank entire file (global yank)
 
 " pull word under cursor into lhs of a substitute (for quick search and replace)
 nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
+" switch search highighting off temporaril
+nmap <silent> <leader>/ :nohlsearch<CR>
 
-" format json
-autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
-
-
-" strip all trailing whitespace 
-fun! <SID>StripTrailingWhitespaces()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  call cursor(l, c)
-endfun
-
-autocmd FileType c,cpp,python,ruby,java,html,css,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
-" insert path of current file into a command
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+cmap <c-p> <c-r>=expand("%:p:h") . "/" <cr>  " insert path of current file into a command
 
 " save with ,,
 inoremap <leader>, <esc>:w<cr>
 nnoremap <leader>, :w<cr>
 
-" save readonly files with w!!
-cmap w!! w !sudo tee % >/dev/null
-
-" save & restore sessions
-map <c-s> :mksession! <cr>
-map <c-o> :source Session.vim <cr>
-
-" switch search highighting off temporaril
-nmap <silent> <leader>/ :nohlsearch<CR>
-
 " escape out of insert mode with jk
 inoremap jk <Esc>
-
-" autocomplete shortcut to ctrol-space
-imap <c-space> <c-x><c-o>
 
 " swaps ' ` for easier bookmark return
 nnoremap ' `
@@ -215,6 +182,23 @@ nnoremap ` '
 " swap ; : for easier commands
 nnoremap ; :
 
+" move cursor to next row rather than line. Good when wrapping is on
+nnoremap j gj
+nnoremap k gk
+
+" save readonly files with w!!
+cmap w!! w !sudo tee % >/dev/null
+
+" save & restore sessions
+map <c-s> :mksession! <cr>
+map <c-o> :source Session.vim <cr>
+
+" autocomplete shortcut to ctrol-space
+imap <c-space> <c-x><c-o>
+
+map <leader>w <C-W>w           " fast window switching
+map <leader>. :b#<cr>          " cycle between buffers
+
 " Vertical split then hop to new buffer
 :noremap <leader>v :vsp<CR>
 :noremap <leader>h :split<CR>
@@ -222,26 +206,6 @@ nnoremap ; :
 " Make current window the only one
 :noremap <leader>O :only :tabo<CR>
 :noremap <leader>o :only<CR>
-
-" move cursor to next row rather than line. Good when wrapping is on
-nnoremap j gj
-nnoremap k gk
-
-" folds
-:noremap <leader>zz zf%
-:noremap <leader>zf f{zf%
-:noremap zx za
-
-
-" error next,previous (ctrl-{n,p})
-:noremap <c-n> :cn<cr>
-:noremap <c-p> :cp<cr>
-
-" ctrlp plugin (because c-p is used for other things)
-:noremap <c-f> :CtrlP<cr>
-
-" Buffer delete (ctrl-c)
-:noremap <c-q> :bd<CR>
 
 " remap going through windows
 map <c-j> <c-w>j
@@ -253,16 +217,17 @@ map <c-c>k <c-w>k<c-w>c<c-w>j
 map <c-c>l <c-w>l<c-w>c<c-w>h
 map <c-c>h <c-w>h<c-w>c<c-w>l
 
+" folds
+:noremap <leader>zz zf%
+:noremap <leader>zf f{zf%
+:noremap zx za
+
+" error next,previous (ctrl-{n,p})
+:noremap <c-n> :cn<cr>
+:noremap <c-p> :cp<cr>
 
 " show invisible chars
 nmap <silent> <leader>i :set nolist!<CR>
-
-" taglist
-nmap <F8> :TagbarToggle<CR>
-
-" Task
-inoremap <silent> <buffer> <c-d-cr> <esc>:call Toggle_task_status()<cr>i
-noremap <silent> <buffer> <c-d-cr> :call Toggle_task_status()<cr>
 
 
 """"""""""""""""
@@ -273,6 +238,19 @@ map <leader>nf :NERDTreeFind<CR>
 map <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
+
+" taglist
+nmap <F8> :TagbarToggle<CR>
+
+" ctrlp plugin (because c-p is used for other things)
+:noremap <c-f> :CtrlP<cr>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'link': '',
+  \ }
+
+
 
 "localvimrc
 "let g:localvimrc_sandbox=0
@@ -286,20 +264,10 @@ map <leader>gs :Gstatus<cr>
 map <leader>gl :Glog<cr>
 map <leader>gd :Gdiff<cr>
 
-" jscomplete 
-autocmd FileType javascript
-  \ :setl omnifunc=jscomplete#CompleteJS
-
-let g:jscomplete_use = ['dom', 'moz']
-
-" nodejs complete
-let g:node_usejscomplete=1
-
-
 " Ack
 " set grepprg=ack\ -ai " set ack as the grep programme
 "let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
-let g:ackprg="ack -a -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!build\.).)*'"
+ let g:ackprg="ack -ai -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!build\.).)*'"
 
 nnoremap <leader>a :Ack<space>
 map <leader>c :Ack <c-R>"<space><cr>
@@ -307,45 +275,19 @@ let g:ackhighlight=1
 
 " Easy Grep options
 let g:EasyGrepInvertWholeWord=1 " ,vv searches for whole word
-"let g:EasyGrepMode = 2
-"let g:EasyGrepRecursive = 1
+"let g:EasyGrepMode=2
+let g:EasyGrepRecursive=1
 
-
-" Change which file opens after executing :Rails command
-let g:rails_default_file='config/database.yml'
 
 " taglist
 let Tlist_Ctags_Cmd = '~/.vim/utils/ctags' " set path to ctags utility
 let Tlist_WinWidth = 50
 let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
 
-" Markdown
-augroup md " add markdown syntax
-	autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:> ft=markdown
-augroup END
-
-augroup mkd " add markdown syntax
-	autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
-augroup END
-
-" mustache
-autocmd VimEnter,BufNewFile,BufRead *.mustache set nofoldenable
-"autocmd VimEnter,BufNewFile,BufRead *.js set foldmethod=manual
-
 " gundo
 if !has("python")
  let g:gundo_disable = 1
 endif
-
-"JavaScript Syntax
-let g:javascript_ignore_javaScriptdoc = 1
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
-  \ 'link': '',
-  \ }
-
 
 "Syntastic settings
 let g:syntastic_javascript_checker="jshint"
@@ -354,11 +296,36 @@ let g:syntastic_auto_loc_list=2 " close location list automatically
                            "\ 'active_filetypes': ['ruby', 'php'],
                            "\ 'passive_filetypes': ['html', 'jqt'] }
 
-" call the jshint config loader script for syntastic
-:autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
-
 " surround plugin
 autocmd FileType php let b:surround_45 = "<?php \r ?>"
+
+
+"""""""""""""""
+" filetype specific
+
+" remove trailing whitespace
+autocmd FileType c,cpp,python,ruby,java,html,css,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+" format json
+autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
+" format xml
+command! PrettyXML call DoPrettyXML()
+
+" jscomplete 
+autocmd FileType javascript
+  \ :setl omnifunc=jscomplete#CompleteJS
+let g:jscomplete_use = ['dom', 'moz']
+
+" nodejs complete
+let g:node_usejscomplete=1
+
+" mustache
+autocmd VimEnter,BufNewFile,BufRead *.mustache set nofoldenable
+
+"JavaScript Syntax
+let g:javascript_ignore_javaScriptdoc = 1
+
+" call the jshint config loader script for syntastic
+:autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
 
 " Python settings
 :autocmd FileType python set expandtab
@@ -375,7 +342,6 @@ imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
 nnoremap <F5> :silent execute "!python $HOME/.vim/utils/browserrefresh.py &"<cr> :redraw!<cr>
 
 " run npm tests
-"nnoremap <leader>t :silent !npm test<cr>:redraw!<cr>
 nnoremap <leader>t :!npm test<cr>
 
 " insert the current working directory
@@ -383,6 +349,14 @@ iabbrev <silent> CWD <c-r>=getcwd()
 
 "save on focus lost
 :au FocusLost * :wa
+
+" strip all trailing whitespace 
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
 
 "pretty xml
 function! DoPrettyXML()
@@ -415,4 +389,4 @@ function! DoPrettyXML()
   " restore the filetype
   exe "set ft=" . l:origft
 endfunction
-command! PrettyXML call DoPrettyXML()
+
