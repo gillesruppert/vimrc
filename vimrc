@@ -15,7 +15,6 @@ let mapleader = ","
 
 set scrolloff=3            " scroll 3 lines before bottom/top
 set autoread               " set to auto read when a file is changed from the outside
-set mouse=a               " allow for full mouse support
 set autowrite
 set showcmd                " display incomplete commands
 set hidden                 " allow buffer to be put in the background without saving
@@ -100,17 +99,18 @@ set title
 
 " set status line
 set laststatus=2
-set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()}
+let g:Powerline_symbols='fancy'
+"set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()}
 
 "display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+"set statusline+=%*
 
 "display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+"set statusline+=%*
 
 " gvim don't display the menu or toolbar
 set guioptions-=m
