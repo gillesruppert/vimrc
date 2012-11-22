@@ -37,6 +37,12 @@ set showbreak=…
 set backspace=start,indent,eol " set backspace to act like normal
 set encoding=utf-8
 
+" line wrapping for automatic wrapping
+"set wrap
+"set tw=80
+"set fo=cqt
+"set wm=0
+
 " search settings
 set hlsearch               " highlight search things
 set incsearch              " go to search results as typing
@@ -78,8 +84,8 @@ set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 
 " vim 7.3 features
 if v:version >= 703
-    set undofile
     set undodir=$HOME/.vim/.undo
+    set undofile
     set undolevels=1000
     set undoreload=10000
     set colorcolumn=80    " show a right margin column
@@ -100,6 +106,9 @@ set title
 " set status line
 set laststatus=2
 let g:Powerline_symbols='fancy'
+let g:Powerline_stl_path_style = 'filename'
+"let g:Powerline_theme = 'solarized16'
+"let g:Powerline_colorscheme = 'solarized16'
 "set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()}
 
 "display a warning if fileformat isnt unix
@@ -267,7 +276,7 @@ map <leader>gd :Gdiff<cr>
 " Ack
 " set grepprg=ack\ -ai " set ack as the grep programme
 "let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
- let g:ackprg="ack -ai -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!build\.).)*'"
+ let g:ackprg="ack -ai -H --nocolor --nogroup --column"
 
 nnoremap <leader>a :Ack<space>
 map <leader>c :Ack <c-R>"<space><cr>
