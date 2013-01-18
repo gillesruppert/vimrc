@@ -13,6 +13,8 @@ filetype plugin indent on
 syntax on
 let mapleader = ","
 
+set modeline
+set modelines=15
 set scrolloff=3            " scroll 3 lines before bottom/top
 set autoread               " set to auto read when a file is changed from the outside
 set autowrite
@@ -106,7 +108,7 @@ set title
 " set status line
 set laststatus=2
 let g:Powerline_symbols='fancy'
-let g:Powerline_stl_path_style = 'filename'
+"let g:Powerline_stl_path_style = 'filename'
 "let g:Powerline_theme = 'solarized16'
 "let g:Powerline_colorscheme = 'solarized16'
 "set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()}
@@ -155,6 +157,8 @@ au BufNewFile,BufRead *.json set filetype=json
 " Markdown
 autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:> ft=markdown
 autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+" Dokuwiki
+autocmd BufRead *.dw  set ai formatoptions=tcroqn2 comments=n:> ft=dokuwiki
 
 
 " settings for folding comments
@@ -170,12 +174,17 @@ nmap <silent> <leader>sv :so $MYVIMRC<cr>
 nnoremap Y y$                  " map Y to match C and D behavior
 nmap gy ggVGy                  " yank entire file (global yank)
 
+nnoremap <Space> @q " replay q macro
+
 " pull word under cursor into lhs of a substitute (for quick search and replace)
 nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " switch search highighting off temporaril
 nmap <silent> <leader>/ :nohlsearch<CR>
 
-cmap <c-p> <c-r>=expand("%:p:h") . "/" <cr>  " insert path of current file into a command
+" insert path of current file into a command
+cmap <c-p> <c-r>=expand("%:p:h") . "/" <cr>
+" insert full path of current file into a command
+cmap <c-f> <c-r>=expand("%:p")<cr>
 
 " save with ,,
 inoremap <leader>, <esc>:w<cr>
@@ -249,7 +258,7 @@ let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
 " taglist
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 
 " ctrlp plugin (because c-p is used for other things)
 :noremap <c-f> :CtrlP<cr>
@@ -279,7 +288,7 @@ map <leader>gd :Gdiff<cr>
  let g:ackprg="ack -ai -H --nocolor --nogroup --column"
 
 nnoremap <leader>a :Ack<space>
-map <leader>c :Ack <c-R>"<space><cr>
+map <leader>c :Ack <C-r>=expand("<cword>")<CR><space><cr>
 let g:ackhighlight=1
 
 " Easy Grep options
@@ -289,9 +298,9 @@ let g:EasyGrepRecursive=1
 
 
 " taglist
-let Tlist_Ctags_Cmd = '~/.vim/utils/ctags' " set path to ctags utility
-let Tlist_WinWidth = 50
-let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
+"let Tlist_Ctags_Cmd = '~/.vim/utils/ctags' " set path to ctags utility
+"let Tlist_WinWidth = 50
+"let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
 
 " gundo
 if !has("python")

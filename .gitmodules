@@ -87,7 +87,7 @@
 	url = git://github.com/msanders/cocoa.vim.git
 [submodule "bundle/vim-twig"]
 	path = bundle/vim-twig
-	url = git://github.com/beyondwords/vim-twig.git
+	url = git@github.com:beyondwords/vim-twig.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = git://github.com/groenewege/vim-less.git
@@ -103,3 +103,9 @@
 [submodule "bundle/vim-javascript-syntax"]
 	path = bundle/vim-javascript-syntax
 	url = git://github.com/jelera/vim-javascript-syntax.git
+[submodule "bundle/vim-dokuwiki"]
+	path = bundle/vim-dokuwiki
+	url = git@github.com:nblock/vim-dokuwiki.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = git@github.com:SirVer/ultisnips.git
