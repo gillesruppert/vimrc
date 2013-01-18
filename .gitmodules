@@ -43,9 +43,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/javascript"]
-	path = bundle/javascript
-	url = https://github.com/pangloss/vim-javascript.git
 [submodule "bundle/textile"]
 	path = bundle/textile
 	url = https://github.com/vim-scripts/Textile-for-VIM.git
