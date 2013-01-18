@@ -108,20 +108,6 @@ set title
 " set status line
 set laststatus=2
 let g:Powerline_symbols='fancy'
-"let g:Powerline_stl_path_style = 'filename'
-"let g:Powerline_theme = 'solarized16'
-"let g:Powerline_colorscheme = 'solarized16'
-"set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \%P\ %{fugitive#statusline()}
-
-"display a warning if fileformat isnt unix
-"set statusline+=%#warningmsg#
-"set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-"set statusline+=%*
-
-"display a warning if file encoding isnt utf-8
-"set statusline+=%#warningmsg#
-"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-"set statusline+=%*
 
 " gvim don't display the menu or toolbar
 set guioptions-=m
@@ -163,6 +149,9 @@ autocmd BufRead *.dw  set ai formatoptions=tcroqn2 comments=n:> ft=dokuwiki
 
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
+
+
+au FileType javascript call JavaScriptFold()
 
 
 """"""""""""""""""""
@@ -258,7 +247,7 @@ let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
 " taglist
-"nmap <F8> :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " ctrlp plugin (because c-p is used for other things)
 :noremap <c-f> :CtrlP<cr>
