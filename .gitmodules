@@ -22,9 +22,6 @@
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/tsaleh/vim-matchit.git
-[submodule "bundle/supertab-continued"]
-	path = bundle/supertab-continued
-	url = https://github.com/vim-scripts/SuperTab-continued..git
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
@@ -46,9 +43,6 @@
 [submodule "bundle/textile"]
 	path = bundle/textile
 	url = https://github.com/vim-scripts/Textile-for-VIM.git
-[submodule "bundle/supertab"]
-	path = bundle/supertab
-	url = https://github.com/vim-scripts/SuperTab.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
