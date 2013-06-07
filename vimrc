@@ -135,13 +135,14 @@ set foldlevel=99
 
 """""""""""""""""
 " added filetypes
-au BufNewFile,BufRead *.scss set filetype=css
+au BufNewFile,BufRead *.scss set filetype=scss
 au BufNewFile,BufRead *.liquid set filetype=html
 au BufNewFile,BufRead *.jqt set filetype=html
 au BufNewFile,BufRead *.twig set filetype=html
+au BufNewFile,BufRead *.cshtml set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
 " Markdown
-autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:> ft=markdown
+autocmd BufRead *.md  set ai formatoptions=tcroqn2 nonu comments=n:> ft=markdown
 autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
 " Dokuwiki
 autocmd BufRead *.dw  set ai formatoptions=tcroqn2 comments=n:> ft=dokuwiki
@@ -151,7 +152,7 @@ autocmd BufRead *.dw  set ai formatoptions=tcroqn2 comments=n:> ft=dokuwiki
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
 
 
-au FileType javascript call JavaScriptFold()
+"au FileType javascript call JavaScriptFold()
 
 
 """"""""""""""""""""
@@ -224,6 +225,12 @@ map <c-c>k <c-w>k<c-w>c<c-w>j
 map <c-c>l <c-w>l<c-w>c<c-w>h
 map <c-c>h <c-w>h<c-w>c<c-w>l
 
+"tabs
+map <c-t>n :tabnew<cr>
+map <c-t>h :tabprevious<cr>
+map <c-t>j :tabnext<cr>
+map <c-t>c :tabclose<cr>
+
 " folds
 :noremap <leader>zz zf%
 :noremap <leader>zf f{zf%
@@ -246,13 +253,21 @@ map <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
+" ultisnips
+let g:UltiSnipsNoPythonWarning = 1
+let g:UltiSnipsEditSplit='vertical'
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+map <leader>u :UltiSnipsEdit<cr>
+
 " taglist
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 
 " ctrlp plugin (because c-p is used for other things)
 :noremap <c-f> :CtrlP<cr>
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$',
   \ 'file': '\.exe$\|\.so$\|\.dll$',
   \ 'link': '',
   \ }
@@ -274,10 +289,10 @@ map <leader>gd :Gdiff<cr>
 " Ack
 " set grepprg=ack\ -ai " set ack as the grep programme
 "let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
- let g:ackprg="ack -ai -H --nocolor --nogroup --column"
+ let g:ackprg="ack --smart-case -H --nocolor --nogroup --column"
 
 nnoremap <leader>a :Ack<space>
-map <leader>c :Ack <C-r>=expand("<cword>")<CR><space><cr>
+map <leader>c :Ack '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
 let g:ackhighlight=1
 
 " Easy Grep options
@@ -311,7 +326,7 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 " filetype specific
 
 " remove trailing whitespace
-autocmd FileType c,cpp,python,ruby,java,html,css,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,python,ruby,java,html,twig,css,scss,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " format json
 autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
 " format xml
