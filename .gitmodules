@@ -48,7 +48,7 @@
 	url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = git://github.com/gillesruppert/syntastic.git
+	url = https://github.com/gillesruppert/syntastic.git
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
@@ -72,61 +72,61 @@
 	url = https://github.com/vim-scripts/localvimrc.git
 [submodule "bundle/vim-stylus"]
 	path = bundle/vim-stylus
-	url = git://github.com/wavded/vim-stylus.git
+	url = https://github.com/wavded/vim-stylus.git
 [submodule "bundle/cocoa"]
 	path = bundle/cocoa
-	url = git://github.com/msanders/cocoa.vim.git
+	url = https://github.com/msanders/cocoa.vim.git
 [submodule "bundle/vim-twig"]
 	path = bundle/vim-twig
-	url = git@github.com:beyondwords/vim-twig.git
+	url = https://github.com/beyondwords/vim-twig.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
-	url = git://github.com/groenewege/vim-less.git
+	url = https://github.com/groenewege/vim-less.git
 [submodule "bundle/jscomplete"]
 	path = bundle/jscomplete
-	url = git://github.com/teramako/jscomplete-vim.git
+	url = https://github.com/teramako/jscomplete-vim.git
 [submodule "bundle/node-js-complete"]
 	path = bundle/node-js-complete
-	url = git://github.com/myhere/vim-nodejs-complete.git
+	url = https://github.com/myhere/vim-nodejs-complete.git
 [submodule "bundle/vim-powerline"]
 	path = bundle/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "bundle/vim-javascript-syntax"]
 	path = bundle/vim-javascript-syntax
-	url = git://github.com/jelera/vim-javascript-syntax.git
+	url = https://github.com/jelera/vim-javascript-syntax.git
 [submodule "bundle/vim-dokuwiki"]
 	path = bundle/vim-dokuwiki
-	url = git@github.com:nblock/vim-dokuwiki.git
+	url = https://github.com/nblock/vim-dokuwiki.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = git@github.com:SirVer/ultisnips.git
+	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
-	url = git@github.com:tpope/vim-repeat.git
+	url = https://github.com/tpope/vim-repeat.git
 [submodule "bundle/vim-commentary"]
 	path = bundle/vim-commentary
-	url = git@github.com:tpope/vim-commentary.git
+	url = https://github.com/tpope/vim-commentary.git
 [submodule "bundle/vim-speeddating"]
 	path = bundle/vim-speeddating
-	url = git@github.com:tpope/vim-speeddating.git
+	url = https://github.com/tpope/vim-speeddating.git
 [submodule "bundle/supertab.git"]
 	path = bundle/supertab.git
-	url = git@github.com:ervandew/supertab.git
+	url = https://github.com/ervandew/supertab.git
 [submodule "bundle/scss-syntax"]
 	path = bundle/scss-syntax
-	url = git://github.com/cakebaker/scss-syntax.vim.git
+	url = https://github.com/cakebaker/scss-syntax.vim.git
 [submodule "bundle/vim-rails"]
 	path = bundle/vim-rails
-	url = git@github.com:tpope/vim-rails.git
+	url = https://github.com/tpope/vim-rails.git
 [submodule "bundle/vim-bundler"]
 	path = bundle/vim-bundler
-	url = git@github.com:tpope/vim-bundler.git
+	url = https://github.com/tpope/vim-bundler.git
 [submodule "bundle/vim-javascript"]
 	path = bundle/vim-javascript
-	url = git@github.com:pangloss/vim-javascript.git
+	url = https://github.com/pangloss/vim-javascript.git
 [submodule "bundle/tern"]
 	path = bundle/tern
-	url = git@github.com:marijnh/tern_for_vim.git
+	url = https://github.com/marijnh/tern_for_vim.git
 [submodule "bundle/vim-handlebars"]
 	path = bundle/vim-handlebars
-	url = git://github.com/nono/vim-handlebars.git
+	url = https://github.com/nono/vim-handlebars.git
