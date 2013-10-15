@@ -140,13 +140,18 @@ au BufNewFile,BufRead *.liquid set filetype=html
 au BufNewFile,BufRead *.jqt set filetype=html
 au BufNewFile,BufRead *.twig set filetype=html
 au BufNewFile,BufRead *.cshtml set filetype=html
+au BufNewFile,BufRead *.mustache set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
 " Markdown
-autocmd BufRead *.md  set ai formatoptions=tcroqn2 nonu comments=n:> ft=markdown
-autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+"autocmd BufRead *.md  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
+autocmd BufRead *.md  setlocal ai nonu textwidth=80 comments=n:> ft=markdown
+autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
 " Dokuwiki
-autocmd BufRead *.dw  set ai formatoptions=tcroqn2 comments=n:> ft=dokuwiki
-
+autocmd BufRead *.dw  set ai formatoptions=tcroqan comments=n:> ft=dokuwiki
+" git commit
+autocmd Filetype gitcommit setlocal spell textwidth=72
+" jshintrc
+autocmd BufNewFile,BufRead .jshintrc set filetype=json
 
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
@@ -164,10 +169,10 @@ nmap <silent> <leader>sv :so $MYVIMRC<cr>
 nnoremap Y y$                  " map Y to match C and D behavior
 nmap gy ggVGy                  " yank entire file (global yank)
 
-nnoremap <Space> @q " replay q macro
+"nnoremap <Space> @q " replay q macro
 
 " pull word under cursor into lhs of a substitute (for quick search and replace)
-nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
+nmap <leader>r :%s#\<\(<C-r>=expand("<cword>")<CR>\)\>#
 " switch search highighting off temporaril
 nmap <silent> <leader>/ :nohlsearch<CR>
 
@@ -267,10 +272,11 @@ map <leader>u :UltiSnipsEdit<cr>
 " ctrlp plugin (because c-p is used for other things)
 :noremap <c-f> :CtrlP<cr>
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$\|node_modules$\|bower_components$\|components$\|vendor$',
   \ 'file': '\.exe$\|\.so$\|\.dll$',
   \ 'link': '',
   \ }
+let g:ctrlp_root_markers = ['.my_app']
 
 
 
