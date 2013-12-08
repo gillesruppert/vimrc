@@ -18,7 +18,7 @@
 	url = https://github.com/sjl/gundo.vim.git
 [submodule "bundle/easygrep"]
 	path = bundle/easygrep
-	url = https://github.com/gaving/vim-easygrep.git
+	url = https://github.com/vim-scripts/EasyGrep.git 
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/tsaleh/vim-matchit.git
@@ -84,7 +84,7 @@
 	url = https://github.com/groenewege/vim-less.git
 [submodule "bundle/jscomplete"]
 	path = bundle/jscomplete
-	url = https://github.com/teramako/jscomplete-vim.git
+	url =  https://github.com/mattn/jscomplete-vim.git
 [submodule "bundle/node-js-complete"]
 	path = bundle/node-js-complete
 	url = https://github.com/myhere/vim-nodejs-complete.git
