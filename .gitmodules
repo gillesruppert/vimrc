@@ -133,3 +133,6 @@
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
+[submodule "bundle/tabline"]
+	path = bundle/tabline
+	url = https://github.com/mkitt/tabline.vim.git
