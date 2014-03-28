@@ -108,7 +108,7 @@ set title
 
 " set status line
 set laststatus=2
-let g:Powerline_symbols='fancy'
+"let g:Powerline_symbols='fancy'
 
 " gvim don't display the menu or toolbar
 set guioptions-=m
@@ -125,7 +125,7 @@ set background=dark
 colorscheme solarized
 if has('gui_running')
   "set guifont=Meslo\ LG\ S\ DZ:h14
-  set guifont=Source\ Code\ Pro:h14
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 endif
 
 " folding
@@ -335,6 +335,22 @@ let g:syntastic_auto_loc_list=2 " close location list automatically
 " surround plugin
 autocmd FileType php let b:surround_45 = "<?php \r ?>"
 
+" airline plugin
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" old vim-powerline symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
 
 """""""""""""""
 " filetype specific
@@ -347,7 +363,7 @@ autocmd FileType json nmap <leader>f :%!jsonlint<cr>
 " format xml
 command! PrettyXML call DoPrettyXML()
 
-" jscomplete 
+" jscomplete
 autocmd FileType javascript
   \ :setl omnifunc=jscomplete#CompleteJS
 let g:jscomplete_use = ['dom', 'moz']
@@ -387,7 +403,7 @@ iabbrev <silent> CWD <c-r>=getcwd()
 "save on focus lost
 :au FocusLost * :wa
 
-" strip all trailing whitespace 
+" strip all trailing whitespace
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
