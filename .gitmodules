@@ -130,3 +130,6 @@
 [submodule "bundle/VisIncr"]
 	path = bundle/VisIncr
 	url = https://github.com/vim-scripts/VisIncr.git
+[submodule "bundle/vim-sparkup"]
+	path = bundle/vim-sparkup
+	url = https://github.com/tristen/vim-sparkup.git
