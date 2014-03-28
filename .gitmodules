@@ -127,3 +127,6 @@
 [submodule "bundle/vim-handlebars"]
 	path = bundle/vim-handlebars
 	url = https://github.com/nono/vim-handlebars.git
+[submodule "bundle/VisIncr"]
+	path = bundle/VisIncr
+	url = https://github.com/vim-scripts/VisIncr.git
