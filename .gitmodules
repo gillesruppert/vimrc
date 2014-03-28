@@ -19,9 +19,6 @@
 [submodule "bundle/easygrep"]
 	path = bundle/easygrep
 	url = https://github.com/vim-scripts/EasyGrep.git 
-[submodule "bundle/matchit"]
-	path = bundle/matchit
-	url = https://github.com/tsaleh/vim-matchit.git
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
