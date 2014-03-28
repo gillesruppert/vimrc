@@ -77,7 +77,8 @@ au GUIEnter * set vb t_vb=
 
 " do not create swap files!
 set nobackup
-set nowritebackup
+set writebackup
+set backupcopy=no
 set noswapfile
 
 set pastetoggle=<F7>
@@ -132,6 +133,9 @@ set foldenable                   " enable folding
 set foldmethod=manual            " detect triple-{ style fold markers
 set foldlevel=99
 
+"""""""""""""""""
+" set shell
+set shell=/usr/local/bin/bash\ -i
 
 """""""""""""""""
 " added filetypes
@@ -146,6 +150,8 @@ au BufNewFile,BufRead *.json set filetype=json
 "autocmd BufRead *.md  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
 autocmd BufRead *.md  setlocal ai nonu textwidth=80 comments=n:> ft=markdown
 autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
+" ConfluenceWiki
+autocmd BufRead *.cwiki  setlocal ai nonu textwidth=80 comments=n:> ft=confluencewiki
 " Dokuwiki
 autocmd BufRead *.dw  set ai formatoptions=tcroqan comments=n:> ft=dokuwiki
 " git commit
@@ -234,6 +240,8 @@ map <c-c>h <c-w>h<c-w>c<c-w>l
 map <c-t>n :tabnew<cr>
 map <c-t>h :tabprevious<cr>
 map <c-t>j :tabnext<cr>
+map <leader>j :tabprevious<cr>
+map <leader>k :tabnext<cr>
 map <c-t>c :tabclose<cr>
 
 " folds
@@ -272,11 +280,11 @@ map <leader>u :UltiSnipsEdit<cr>
 " ctrlp plugin (because c-p is used for other things)
 :noremap <c-f> :CtrlP<cr>
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$\|node_modules$\|bower_components$\|components$\|vendor$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$\|node_modules$\|bower_components$\|components$\|vendor$\|dest$\|build$',
+  \ 'file': '\.DS_Store$\|\.exe$\|\.so$\|\.dll$',
   \ 'link': '',
   \ }
-let g:ctrlp_root_markers = ['.my_app']
+let g:ctrlp_root_markers = ['.my_app', '.mob']
 
 
 
@@ -334,7 +342,8 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 " remove trailing whitespace
 autocmd FileType c,cpp,python,ruby,java,html,twig,css,scss,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " format json
-autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
+"autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
+autocmd FileType json nmap <leader>f :%!jsonlint<cr>
 " format xml
 command! PrettyXML call DoPrettyXML()
 
