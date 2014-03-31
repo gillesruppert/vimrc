@@ -136,3 +136,9 @@
 [submodule "bundle/tabline"]
 	path = bundle/tabline
 	url = https://github.com/mkitt/tabline.vim.git
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "bundle/vim-matchit"]
+	path = bundle/vim-matchit
+	url = https://github.com/edsono/vim-matchit.git
