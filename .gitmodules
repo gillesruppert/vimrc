@@ -91,9 +91,6 @@
 [submodule "bundle/vim-dokuwiki"]
 	path = bundle/vim-dokuwiki
 	url = https://github.com/nblock/vim-dokuwiki.git
-[submodule "bundle/ultisnips"]
-	path = bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
@@ -148,3 +145,6 @@
 [submodule "bundle/dash.vim"]
 	path = bundle/dash.vim
 	url = https://github.com/rizzatti/dash.vim.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/gillesruppert/ultisnips.git
