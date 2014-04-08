@@ -268,6 +268,12 @@ map <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
+" dash
+nmap <silent> <leader>s <Plug>DashSearch
+let g:dash_map = {
+      \ 'ruby': 'rails'
+      \ }
+
 " ultisnips
 let g:UltiSnipsNoPythonWarning = 1
 let g:UltiSnipsEditSplit='vertical'
