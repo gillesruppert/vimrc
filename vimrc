@@ -338,6 +338,7 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 " airline plugin
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'powerlineish'
 
 " old vim-powerline symbols
 if !exists('g:airline_symbols')
