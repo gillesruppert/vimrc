@@ -135,7 +135,7 @@ set foldlevel=99
 
 """""""""""""""""
 " set shell
-set shell=/usr/local/bin/bash\ -i
+"set shell=/usr/local/bin/bash\ -c
 
 """""""""""""""""
 " added filetypes
