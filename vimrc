@@ -164,6 +164,8 @@ au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*
 
 
 "au FileType javascript call JavaScriptFold()
+autocmd FileType javascript setlocal omnifunc:jscomplete#CompleteJS
+autocmd FileType javascript setlocal foldmethod=manual
 
 
 """"""""""""""""""""
