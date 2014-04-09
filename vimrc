@@ -268,6 +268,12 @@ map <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
+" tabularize
+nmap <leader>a: :Tabularize /:\zs<cr>
+vmap <leader>a: :Tabularize /:\zs<cr>
+nmap <leader>a= :Tabularize /=<cr>
+vmap <leader>a= :Tabularize /=<cr>
+
 " dash
 nmap <silent> <leader>s <Plug>DashSearch
 let g:dash_map = {
