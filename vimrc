@@ -12,6 +12,7 @@ filetype plugin indent on
 "general settings
 syntax on
 let mapleader = ","
+let maplocalleader = "\\"
 
 set modeline
 set modelines=15
@@ -68,6 +69,7 @@ set tabstop=2
 set softtabstop=2
 set expandtab
 set smarttab
+set shiftround
 
 " be quiet
 set visualbell             " don't beep
@@ -146,52 +148,66 @@ au BufNewFile,BufRead *.twig set filetype=html
 au BufNewFile,BufRead *.cshtml set filetype=html
 au BufNewFile,BufRead *.mustache set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
+
 " Markdown
-"autocmd BufRead *.md  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
 autocmd BufRead *.md  setlocal ai nonu textwidth=80 comments=n:> ft=markdown
 autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
+
 " ConfluenceWiki
 autocmd BufRead *.cwiki  setlocal ai nonu textwidth=80 comments=n:> ft=confluencewiki
+
 " Dokuwiki
 autocmd BufRead *.dw  set ai formatoptions=tcroqan comments=n:> ft=dokuwiki
+
 " git commit
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
 " jshintrc
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
 
 " settings for folding comments
 au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
 
-
 "au FileType javascript call JavaScriptFold()
-autocmd FileType javascript setlocal omnifunc:jscomplete#CompleteJS
-autocmd FileType javascript setlocal foldmethod=manual
+"autocmd FileType javascript setlocal omnifunc:jscomplete#CompleteJS
+"autocmd FileType javascript setlocal foldmethod=manual
 
 
 """"""""""""""""""""
 " keyboard shortcuts
 " edit and save .vimrc quickly
-nmap <silent> <leader>ev :e $MYVIMRC<cr>
-nmap <silent> <leader>sv :so $MYVIMRC<cr>
+nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :so $MYVIMRC<cr>
 
-nnoremap Y y$                  " map Y to match C and D behavior
-nmap gy ggVGy                  " yank entire file (global yank)
+" map Y to match C and D behavior
+nnoremap Y y$
+" yank entire file (global yank)
+nnoremap gy ggVGy
 
-"nnoremap <Space> @q " replay q macro
+" replay q macro
+nnoremap <Space> @q
+
+" swap lines
+noremap _ ddkP
+noremap - ddp
 
 " pull word under cursor into lhs of a substitute (for quick search and replace)
-nmap <leader>r :%s#\<\(<C-r>=expand("<cword>")<CR>\)\>#
+nnoremap <leader>r :%s#\<\(<C-r>=expand("<cword>")<CR>\)\>#
+
 " switch search highighting off temporaril
-nmap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " insert path of current file into a command
-cmap <c-p> <c-r>=expand("%:p:h") . "/" <cr>
+cnoremap <c-p> <c-r>=expand("%:p:h") . "/" <cr>
 " insert full path of current file into a command
-cmap <c-f> <c-r>=expand("%:p")<cr>
+cnoremap <c-f> <c-r>=expand("%:p")<cr>
 
 " save with ,,
 inoremap <leader>, <esc>:w<cr>
 nnoremap <leader>, :w<cr>
+
+" uppercase in insert mode
+inoremap <c-u> <esc>viwUea
 
 " escape out of insert mode with jk
 inoremap jk <Esc>
@@ -208,17 +224,17 @@ nnoremap j gj
 nnoremap k gk
 
 " save readonly files with w!!
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " save & restore sessions
-map <c-s> :mksession! <cr>
-map <c-o> :source Session.vim <cr>
+noremap <c-s> :mksession! <cr>
+noremap <c-o> :source Session.vim <cr>
 
 " autocomplete shortcut to ctrol-space
-imap <c-space> <c-x><c-o>
+inoremap <c-space> <c-x><c-o>
 
-map <leader>w <C-W>w           " fast window switching
-map <leader>. :b#<cr>          " cycle between buffers
+noremap <leader>w <C-W>w           " fast window switching
+noremap <leader>. :b#<cr>          " cycle between buffers
 
 " Vertical split then hop to new buffer
 :noremap <leader>v :vsp<CR>
@@ -229,53 +245,48 @@ map <leader>. :b#<cr>          " cycle between buffers
 :noremap <leader>o :only<CR>
 
 " remap going through windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-map <c-c>j <c-w>j<c-w>c<c-w>k
-map <c-c>k <c-w>k<c-w>c<c-w>j
-map <c-c>l <c-w>l<c-w>c<c-w>h
-map <c-c>h <c-w>h<c-w>c<c-w>l
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+noremap <c-c>j <c-w>j<c-w>c<c-w>k
+noremap <c-c>k <c-w>k<c-w>c<c-w>j
+noremap <c-c>l <c-w>l<c-w>c<c-w>h
+noremap <c-c>h <c-w>h<c-w>c<c-w>l
 
 "tabs
-map <c-t>n :tabnew<cr>
-map <c-t>h :tabprevious<cr>
-map <c-t>j :tabnext<cr>
-map <leader>j :tabprevious<cr>
-map <leader>k :tabnext<cr>
-map <c-t>c :tabclose<cr>
+noremap <c-t>n :tabnew<cr>
+noremap <c-t>h :tabprevious<cr>
+noremap <c-t>j :tabnext<cr>
+noremap <leader>j :tabprevious<cr>
+noremap <leader>k :tabnext<cr>
+noremap <c-t>c :tabclose<cr>
 
 " folds
 :noremap <leader>zz zf%
 :noremap <leader>zf f{zf%
 :noremap zx za
+:noremap zb zf%
 
 " error next,previous (ctrl-{n,p})
 :noremap <c-n> :cn<cr>
 :noremap <c-p> :cp<cr>
 
 " show invisible chars
-nmap <silent> <leader>i :set nolist!<CR>
+nnoremap <silent> <leader>i :set nolist!<CR>
 
 
-""""""""""""""""
-" Plugin settings
-" nerd tree
-map <leader>d :NERDTreeToggle<CR>
-map <leader>nf :NERDTreeFind<CR>
-map <leader>nm :NERDTreeMirror<CR>
+"nore"""""""""""""""
+"nore Plugin settings
+"nore nerd tree
+noremap <leader>d :NERDTreeToggle<CR>
+noremap <leader>nf :NERDTreeFind<CR>
+noremap <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
 "let g:NERDTreeShowHidden=1
 
-" tabularize
-nmap <leader>a: :Tabularize /:\zs<cr>
-vmap <leader>a: :Tabularize /:\zs<cr>
-nmap <leader>a= :Tabularize /=<cr>
-vmap <leader>a= :Tabularize /=<cr>
-
 " dash
-nmap <silent> <leader>s <Plug>DashSearch
+nnoremap <silent> <leader>s <Plug>DashSearch
 let g:dash_map = {
       \ 'ruby': 'rails'
       \ }
@@ -283,13 +294,15 @@ let g:dash_map = {
 " ultisnips
 let g:UltiSnipsNoPythonWarning = 1
 let g:UltiSnipsEditSplit='vertical'
-"let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-map <leader>u :UltiSnipsEdit<cr>
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+noremap <leader>u :UltiSnipsEdit<cr>
+
+inoremap <c-x><c-k> <c-x><c-k>
 
 " taglist
-"nmap <F8> :TagbarToggle<CR>
+"nnoremap <F8> :TagbarToggle<CR>
 
 " ctrlp plugin (because c-p is used for other things)
 :noremap <c-f> :CtrlP<cr>
@@ -307,12 +320,12 @@ let g:ctrlp_root_markers = ['.my_app', '.mob']
 let g:localvimrc_ask=0
 
 " Gundo plugin
-map <F6> :GundoToggle<cr>
+noremap <F6> :GundoToggle<cr>
 
 " fugitive
-map <leader>gs :Gstatus<cr>
-map <leader>gl :Glog<cr>
-map <leader>gd :Gdiff<cr>
+noremap <leader>gs :Gstatus<cr>
+noremap <leader>gl :Glog<cr>
+noremap <leader>gd :Gdiff<cr>
 
 " Ack
 " set grepprg=ack\ -ai " set ack as the grep programme
@@ -320,7 +333,7 @@ map <leader>gd :Gdiff<cr>
  let g:ackprg="ack --smart-case -H --nocolor --nogroup --column"
 
 nnoremap <leader>a :Ack<space>
-map <leader>c :Ack '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
+noremap <leader>c :Ack '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
 let g:ackhighlight=1
 
 " Easy Grep options
@@ -373,14 +386,12 @@ let g:airline_symbols.linenr = ''
 " remove trailing whitespace
 autocmd FileType c,cpp,python,ruby,java,html,twig,css,scss,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " format json
-"autocmd FileType json nmap <leader>f :%!python -m json.tool<cr>
-autocmd FileType json nmap <leader>f :%!jsonlint<cr>
+autocmd FileType json nnoremap <leader>f :%!jsonlint<cr>
 " format xml
 command! PrettyXML call DoPrettyXML()
 
 " jscomplete
-autocmd FileType javascript
-  \ :setl omnifunc=jscomplete#CompleteJS
+autocmd FileType javascript :setl omnifunc=jscomplete#CompleteJS
 let g:jscomplete_use = ['dom', 'moz']
 
 " nodejs complete
@@ -394,6 +405,7 @@ let g:javascript_ignore_javaScriptdoc = 1
 
 " call the jshint config loader script for syntastic
 :autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
+:autocmd FileType javascript set foldmethod=manual
 
 " Python settings
 :autocmd FileType python set expandtab
@@ -404,7 +416,7 @@ let g:javascript_ignore_javaScriptdoc = 1
 """""""""""
 " vim tools
 " create a uuid
-imap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
+inoremap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
 
 "refresh browser"
 nnoremap <F5> :silent execute "!python $HOME/.vim/utils/browserrefresh.py &"<cr> :redraw!<cr>
