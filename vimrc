@@ -148,6 +148,8 @@ au BufNewFile,BufRead *.twig set filetype=html
 au BufNewFile,BufRead *.cshtml set filetype=html
 au BufNewFile,BufRead *.mustache set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
+au BufNewFile,BufRead *.jsx set filetype=javascript
+au BufNewFile,BufRead *.es6 set filetype=javascript
 
 " Markdown
 autocmd BufRead *.md  setlocal ai nonu textwidth=80 comments=n:> ft=markdown
