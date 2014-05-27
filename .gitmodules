@@ -127,3 +127,6 @@
 [submodule "bundle/vim-jsx"]
 	path = bundle/vim-jsx
 	url = https://github.com/mxw/vim-jsx.git
+[submodule "bundle/patchreview-vim"]
+	path = bundle/patchreview-vim
+	url = https://github.com/junkblocker/patchreview-vim.git
