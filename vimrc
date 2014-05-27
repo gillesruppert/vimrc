@@ -344,11 +344,6 @@ let g:EasyGrepInvertWholeWord=1 " ,vv searches for whole word
 let g:EasyGrepRecursive=1
 
 
-" taglist
-"let Tlist_Ctags_Cmd = '~/.vim/utils/ctags' " set path to ctags utility
-"let Tlist_WinWidth = 50
-"let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
-
 " gundo
 if !has("python")
  let g:gundo_disable = 1
