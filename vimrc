@@ -378,6 +378,7 @@ let g:airline_symbols.linenr = ''
 
 " GitGutter plugin
 nnoremap <leader>gg :GitGutterToggle<cr>
+let g:gitgutter_enabled = 0
 
 
 """""""""""""""
