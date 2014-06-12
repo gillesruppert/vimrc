@@ -219,7 +219,7 @@ nnoremap ' `
 nnoremap ` '
 
 " swap ; : for easier commands
-nnoremap ; :
+"nnoremap ; :
 
 " move cursor to next row rather than line. Good when wrapping is on
 nnoremap j gj
