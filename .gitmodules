@@ -130,3 +130,6 @@
 [submodule "bundle/patchreview-vim"]
 	path = bundle/patchreview-vim
 	url = https://github.com/junkblocker/patchreview-vim.git
+[submodule "bundle/largefile"]
+	path = bundle/largefile
+	url = https://github.com/markwu/largefile.git
