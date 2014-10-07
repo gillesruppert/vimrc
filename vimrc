@@ -123,11 +123,10 @@ set guioptions-=L
 
 """""" colour scheme & fonts
 " set t_Co=256
-set background=dark
+set background=light
 colorscheme solarized
 if has('gui_running')
-  "set guifont=Meslo\ LG\ S\ DZ:h14
-  set guifont=Source\ Code\ Pro\ for\ Powerline:h14
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h11
 endif
 
 " folding
@@ -257,12 +256,10 @@ noremap <c-c>l <c-w>l<c-w>c<c-w>h
 noremap <c-c>h <c-w>h<c-w>c<c-w>l
 
 "tabs
-noremap <c-t>n :tabnew<cr>
-noremap <c-t>h :tabprevious<cr>
-noremap <c-t>j :tabnext<cr>
-noremap <leader>j :tabprevious<cr>
-noremap <leader>k :tabnext<cr>
-noremap <c-t>c :tabclose<cr>
+noremap <c-[>n :tabnew<cr>
+noremap <c-[><c-[> :tabprevious<cr>
+noremap <c-[><c-]> :tabnext<cr>
+noremap <c-[>c :tabclose<cr>
 
 " folds
 :noremap <leader>zz zf%
@@ -326,7 +323,6 @@ noremap <F6> :GundoToggle<cr>
 
 " fugitive
 noremap <leader>gs :Gstatus<cr>
-noremap <leader>gl :Glog<cr>
 noremap <leader>gd :Gdiff<cr>
 
 " Ack
@@ -361,8 +357,10 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 
 " airline plugin
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'powerlineish'
+" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+"let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'solarized'
 
 " old vim-powerline symbols
 if !exists('g:airline_symbols')
