@@ -7,6 +7,9 @@ silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
 filetype plugin indent on
 
+let g:fb_default_opts = 0
+source $ADMIN_SCRIPTS/master.vimrc
+source $ADMIN_SCRIPTS/vim/biggrep.vim
 
 """""""""""""""""
 "general settings
@@ -39,12 +42,6 @@ set linebreak              " this will not break whole words while wrap is enabl
 set showbreak=…
 set backspace=start,indent,eol " set backspace to act like normal
 set encoding=utf-8
-
-" line wrapping for automatic wrapping
-"set wrap
-"set tw=80
-"set fo=cqt
-"set wm=0
 
 " search settings
 set hlsearch               " highlight search things
@@ -97,7 +94,7 @@ if v:version >= 703
 endif
 
 
-set history=100 " create a larger history
+set history=1000 " create a larger history
 
 " hide files matching the pattern:
 let g:explHideFiles='^\.,.*\.pyc$'
@@ -110,7 +107,6 @@ set title
 
 " set status line
 set laststatus=2
-"let g:Powerline_symbols='fancy'
 
 " gvim don't display the menu or toolbar
 set guioptions-=m
@@ -122,11 +118,10 @@ set guioptions-=L
 
 
 """""" colour scheme & fonts
-" set t_Co=256
+set t_Co=256
 set background=dark
 colorscheme solarized
 if has('gui_running')
-  "set guifont=Meslo\ LG\ S\ DZ:h14
   set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 endif
 
@@ -135,51 +130,28 @@ set foldenable                   " enable folding
 set foldmethod=manual            " detect triple-{ style fold markers
 set foldlevel=99
 
-"""""""""""""""""
-" set shell
-"set shell=/usr/local/bin/bash\ -c
 
 """""""""""""""""
 " added filetypes
-au BufNewFile,BufRead *.scss set filetype=scss
-au BufNewFile,BufRead *.liquid set filetype=html
-au BufNewFile,BufRead *.jqt set filetype=html
-au BufNewFile,BufRead *.twig set filetype=html
-au BufNewFile,BufRead *.cshtml set filetype=html
-au BufNewFile,BufRead *.mustache set filetype=html
 au BufNewFile,BufRead *.json set filetype=json
 au BufNewFile,BufRead *.jsx set filetype=javascript
-au BufNewFile,BufRead *.es6 set filetype=javascript
 
 " Markdown
 autocmd BufRead *.md  setlocal ai nonu textwidth=80 comments=n:> ft=markdown
 autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
 
-" ConfluenceWiki
-autocmd BufRead *.cwiki  setlocal ai nonu textwidth=80 comments=n:> ft=confluencewiki
-
-" Dokuwiki
-autocmd BufRead *.dw  set ai formatoptions=tcroqan comments=n:> ft=dokuwiki
-
 " git commit
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" jshintrc
-autocmd BufNewFile,BufRead .jshintrc set filetype=json
-
-" settings for folding comments
-au BufNewFile,BufRead *.cpp,*.c,*.h,*.java,*.js syn region myCComment start="/\*\*" end="\*/" fold keepend transparent
-
 "au FileType javascript call JavaScriptFold()
-"autocmd FileType javascript setlocal omnifunc:jscomplete#CompleteJS
-"autocmd FileType javascript setlocal foldmethod=manual
+autocmd FileType javascript setlocal foldmethod=manual
 
 
 """"""""""""""""""""
 " keyboard shortcuts
 " edit and save .vimrc quickly
-nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <silent> <leader>sv :so $MYVIMRC<cr>
+nnoremap <silent> <leader>ev :vsplit $HOME/.vim/vimrc<cr>
+nnoremap <silent> <leader>sv :so $HOME/.vim/vimrc<cr>
 
 " map Y to match C and D behavior
 nnoremap Y y$
@@ -208,11 +180,11 @@ cnoremap <c-f> <c-r>=expand("%:p")<cr>
 inoremap <leader>, <esc>:w<cr>
 nnoremap <leader>, :w<cr>
 
-" uppercase in insert mode
-inoremap <c-u> <esc>viwUea
-
 " escape out of insert mode with jk
 inoremap jk <Esc>
+
+" uppercase in insert mode
+inoremap <c-u> <esc>viwUea
 
 " swaps ' ` for easier bookmark return
 nnoremap ' `
@@ -227,10 +199,6 @@ nnoremap k gk
 
 " save readonly files with w!!
 cnoremap w!! w !sudo tee % >/dev/null
-
-" save & restore sessions
-noremap <c-s> :mksession! <cr>
-noremap <c-o> :source Session.vim <cr>
 
 " autocomplete shortcut to ctrol-space
 inoremap <c-space> <c-x><c-o>
@@ -258,10 +226,8 @@ noremap <c-c>h <c-w>h<c-w>c<c-w>l
 
 "tabs
 noremap <c-t>n :tabnew<cr>
-noremap <c-t>h :tabprevious<cr>
-noremap <c-t>j :tabnext<cr>
-noremap <leader>j :tabprevious<cr>
-noremap <leader>k :tabnext<cr>
+noremap <c-t>j :tabprevious<cr>
+noremap <c-t>k :tabnext<cr>
 noremap <c-t>c :tabclose<cr>
 
 " folds
@@ -270,55 +236,97 @@ noremap <c-t>c :tabclose<cr>
 :noremap zx za
 :noremap zb zf%
 
-" error next,previous (ctrl-{n,p})
-:noremap <c-n> :cn<cr>
-:noremap <c-p> :cp<cr>
-
 " show invisible chars
 nnoremap <silent> <leader>i :set nolist!<CR>
 
 
-"nore"""""""""""""""
-"nore Plugin settings
-"nore nerd tree
+""""""""""""""""
+" Plugin settings
+" nerd tree
 noremap <leader>d :NERDTreeToggle<CR>
 noremap <leader>nf :NERDTreeFind<CR>
-noremap <leader>nm :NERDTreeMirror<CR>
 let g:NERDChristmasTree=1
-"let g:NERDTreeShowHidden=1
 
-" dash
-nnoremap <silent> <leader>s <Plug>DashSearch
-let g:dash_map = {
-      \ 'ruby': 'rails'
-      \ }
+" Unite
+" Use fuzzy matching in native Unite filters
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
-" ultisnips
-let g:UltiSnipsNoPythonWarning = 1
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-noremap <leader>u :UltiSnipsEdit<cr>
+let g:unite_source_history_yank_enable = 1
+nnoremap <silent> <leader>y :Unite -quick-match history/yank<cr>
 
-inoremap <c-x><c-k> <c-x><c-k>
+" Quickly jump between open buffers
+nnoremap <silent> <leader>b :Unite -start-insert -buffer-name=buffer buffer<cr>
 
-" taglist
-"nnoremap <F8> :TagbarToggle<CR>
+" FB-only
+nnoremap <silent> <leader>k :call FBBigGrep()<cr>
 
-" ctrlp plugin (because c-p is used for other things)
-:noremap <c-f> :CtrlP<cr>
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$\|node_modules$\|bower_components$\|components$\|vendor$\|dest$\|build$',
-  \ 'file': '\.DS_Store$\|\.exe$\|\.so$\|\.dll$',
-  \ 'link': '',
-  \ }
-let g:ctrlp_root_markers = ['.my_app', '.mob']
+" Speed up file_rec when there are lots of candidates
+let g:unite_redraw_hold_candidates = 1000
 
+" Use ag for search
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+"nnoremap <c-p> :Unite file_rec/async<cr>
+"nnoremap <space>/ :Unite grep:.<cr>
+"nnoremap <space>y :Unite history/yank<cr>
+"nnoremap <space>s :Unite -quick-match buffer<cr>
+"
+"nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+"nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+"nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+"nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+"nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+"nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+
+"nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+"nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+"nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+"nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+"nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+"nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+function! FBBigGrep()
+  call inputsave()
+  let q = input("TBGS>>  ")
+  call inputrestore()
+  if q == ""
+    return
+  endif
+
+  let query = substitute(q, ' ', '\\ ', 'g')
+  let q2 = substitute(query, ':', '\\:', 'g')
+  exec 'Unite -no-split -start-insert -buffer-name=tbgs biggrep:' . q2
+  return
+endfunction
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
+
+" command-t
+nnoremap <c-f> :CommandT<cr>
+let g:CommandTMaxFiles=1000000000
+let g:CommandTMaxDepth=50
+let g:CommandTMaxHeight = 30
+let g:CommandTInputDebounce = 100
+let g:CommandTFileScanner = 'watchman'
+
+nnoremap <leader>t :TBGS 
+nnoremap <leader>tt :TBGS <C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>f :TBGS providesModule 
+nnoremap <leader>] :TBGS providesModule <C-r>=expand("<cword>")<CR><cr>
 
 
 "localvimrc
-"let g:localvimrc_sandbox=0
 let g:localvimrc_ask=0
 
 " Gundo plugin
@@ -329,32 +337,17 @@ noremap <leader>gs :Gstatus<cr>
 noremap <leader>gl :Glog<cr>
 noremap <leader>gd :Gdiff<cr>
 
-" Ack
-" set grepprg=ack\ -ai " set ack as the grep programme
-"let g:ackprg="ack -H --type-set jade=.jade --type-set stylus=.styl --type-set coffee=.coffee --type-set html=.jqt --nocolor --nogroup --column --ignore-dir=node_modules -G '^((?!min\.).)*$'"
- let g:ackprg="ack --smart-case -H --nocolor --nogroup --column"
+" Ack/ag
+set grepprg=ag\ -ai " set ag as the grep programme
 
-nnoremap <leader>a :Ack<space>
-noremap <leader>c :Ack '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
-let g:ackhighlight=1
-
-" Easy Grep options
-let g:EasyGrepInvertWholeWord=1 " ,vv searches for whole word
-"let g:EasyGrepMode=2
-let g:EasyGrepRecursive=1
-
+nnoremap <leader>a :Ag<space>
+noremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
+let g:aghighlight=1
 
 " gundo
 if !has("python")
  let g:gundo_disable = 1
 endif
-
-"Syntastic settings
-let g:syntastic_javascript_checker="jshint"
-let g:syntastic_auto_loc_list=2 " close location list automatically
-"let g:syntastic_mode_map = { 'mode': 'active',
-                           "\ 'active_filetypes': ['ruby', 'php'],
-                           "\ 'passive_filetypes': ['html', 'jqt'] }
 
 " surround plugin
 autocmd FileType php let b:surround_45 = "<?php \r ?>"
@@ -362,7 +355,7 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 " airline plugin
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'solarized'
 
 " old vim-powerline symbols
 if !exists('g:airline_symbols')
@@ -379,32 +372,22 @@ let g:airline_symbols.linenr = ''
 " GitGutter plugin
 nnoremap <leader>gg :GitGutterToggle<cr>
 
+"syntastic
+let g:syntastic_mode_map = { 'mode' : 'passive',
+                           \ 'active_filetypes': [''],
+                           \ 'passive_filetypes': [''] }
+let g:syntastic_javascript_checkers = ['jshint']
+
 
 """""""""""""""
 " filetype specific
 
 " remove trailing whitespace
 autocmd FileType c,cpp,python,ruby,java,html,twig,css,scss,json,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
 " format json
 autocmd FileType json nnoremap <leader>f :%!jsonlint<cr>
-" format xml
-command! PrettyXML call DoPrettyXML()
 
-" jscomplete
-autocmd FileType javascript :setl omnifunc=jscomplete#CompleteJS
-let g:jscomplete_use = ['dom', 'moz']
-
-" nodejs complete
-let g:node_usejscomplete=1
-
-" mustache
-autocmd VimEnter,BufNewFile,BufRead *.mustache set nofoldenable
-
-"JavaScript Syntax
-let g:javascript_ignore_javaScriptdoc = 1
-
-" call the jshint config loader script for syntastic
-:autocmd FileType javascript source $HOME/.vim/jshint-config-loader.vim
 :autocmd FileType javascript set foldmethod=manual
 
 " Python settings
@@ -415,15 +398,6 @@ let g:javascript_ignore_javaScriptdoc = 1
 
 """""""""""
 " vim tools
-" create a uuid
-inoremap <c-j>d <c-r>=system('$HOME/.vim/utils/uuid.sh')<cr>
-
-"refresh browser"
-nnoremap <F5> :silent execute "!python $HOME/.vim/utils/browserrefresh.py &"<cr> :redraw!<cr>
-
-" run npm tests
-nnoremap <leader>t :!npm test<cr>
-
 " insert the current working directory
 iabbrev <silent> CWD <c-r>=getcwd()
 
@@ -437,36 +411,4 @@ fun! <SID>StripTrailingWhitespaces()
   %s/\s\+$//e
   call cursor(l, c)
 endfun
-
-"pretty xml
-function! DoPrettyXML()
-  " save the filetype so we can restore it later
-  let l:origft = &ft
-  set ft=
-  " delete the xml header if it exists. This will
-  " permit us to surround the document with fake tags
-  " without creating invalid xml.
-  1s/<?xml .*?>//e
-  " insert fake tags around the entire document.
-  " This will permit us to pretty-format excerpts of
-  " XML that may contain multiple top-level elements.
-  0put ='<PrettyXML>'
-  $put ='</PrettyXML>'
-  silent %!xmllint --format -
-  " xmllint will insert an <?xml?> header. it's
-  easy enough to delete
-  " if you don't want it.
-  " delete the fake tags
-  2d
-  $d
-  " restore the 'normal' indentation,
-  which is one extra level
-  " too deep due to the extra tags we
-  wrapped around the document.
-  silent %<
-  " back to home
-  1
-  " restore the filetype
-  exe "set ft=" . l:origft
-endfunction
 
