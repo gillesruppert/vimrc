@@ -158,15 +158,15 @@ nnoremap Y y$
 " yank entire file (global yank)
 nnoremap gy ggVGy
 
-" replay q macro
-nnoremap <Space> @q
-
 " swap lines
 noremap _ ddkP
 noremap - ddp
 
 " pull word under cursor into lhs of a substitute (for quick search and replace)
 nnoremap <leader>r :%s#\<\(<C-r>=expand("<cword>")<CR>\)\>#
+
+"sort
+nnoremap <leader>as :'<,'>sort i<CR>
 
 " switch search highighting off temporaril
 nnoremap <silent> <leader>/ :nohlsearch<CR>
@@ -219,16 +219,16 @@ noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
-noremap <c-c>j <c-w>j<c-w>c<c-w>k
-noremap <c-c>k <c-w>k<c-w>c<c-w>j
-noremap <c-c>l <c-w>l<c-w>c<c-w>h
-noremap <c-c>h <c-w>h<c-w>c<c-w>l
+"noremap <c-c>j <c-w>j<c-w>c<c-w>k
+"noremap <c-c>k <c-w>k<c-w>c<c-w>j
+"noremap <c-c>l <c-w>l<c-w>c<c-w>h
+"noremap <c-c>h <c-w>h<c-w>c<c-w>l
 
 "tabs
-noremap <c-t>n :tabnew<cr>
-noremap <c-t>j :tabprevious<cr>
-noremap <c-t>k :tabnext<cr>
-noremap <c-t>c :tabclose<cr>
+noremap <leader>mn :tabnew<cr>
+noremap <leader>mj :tabprevious<cr>
+noremap <leader>mk :tabnext<cr>
+noremap <leader>mc :tabclose<cr>
 
 " folds
 :noremap <leader>zz zf%
@@ -246,6 +246,7 @@ nnoremap <silent> <leader>i :set nolist!<CR>
 noremap <leader>d :NERDTreeToggle<CR>
 noremap <leader>nf :NERDTreeFind<CR>
 let g:NERDChristmasTree=1
+
 
 " Unite
 " Use fuzzy matching in native Unite filters
@@ -320,10 +321,12 @@ let g:CommandTMaxHeight = 30
 let g:CommandTInputDebounce = 100
 let g:CommandTFileScanner = 'watchman'
 
-nnoremap <leader>t :TBGS 
-nnoremap <leader>tt :TBGS <C-r>=expand("<cword>")<CR><cr>
-nnoremap <leader>f :TBGS providesModule 
+" TBGS
+nnoremap <leader>b :TBGS 
+nnoremap <leader>bb :TBGS <C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>bf :TBGS providesModule 
 nnoremap <leader>] :TBGS providesModule <C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>[ :TBGS require('<C-r>=expand("<cword>")<CR><cr>
 
 
 "localvimrc
@@ -342,6 +345,8 @@ set grepprg=ag\ -ai " set ag as the grep programme
 
 nnoremap <leader>a :Ag<space>
 noremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
+noremap <leader>ac :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
+noremap <leader>ar :Ag '@providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads/powereditor<cr>
 let g:aghighlight=1
 
 " gundo
@@ -354,20 +359,20 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 
 " airline plugin
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'solarized'
 
 " old vim-powerline symbols
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+"if !exists('g:airline_symbols')
+  "let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
 
 " GitGutter plugin
 nnoremap <leader>gg :GitGutterToggle<cr>
