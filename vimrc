@@ -151,14 +151,10 @@ au BufNewFile,BufRead *.jsx set filetype=javascript
 au BufNewFile,BufRead *.es6 set filetype=javascript
 
 " Markdown
-autocmd BufRead *.md  setlocal ai nonu textwidth=80 comments=n:> ft=markdown
-autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80 comments=n:> ft=markdown
-
-" ConfluenceWiki
-autocmd BufRead *.cwiki  setlocal ai nonu textwidth=80 comments=n:> ft=confluencewiki
-
-" Dokuwiki
-autocmd BufRead *.dw  set ai formatoptions=tcroqan comments=n:> ft=dokuwiki
+augroup markdown
+  au!
+  autocmd BufNewFile,BufRead *.md,*.markdown,*.mkd  setlocal ai nonu spell textwidth=80 comments=n:> formatoptions=tcroqan ft=ghmarkdown
+augroup END
 
 " git commit
 autocmd Filetype gitcommit setlocal spell textwidth=72
