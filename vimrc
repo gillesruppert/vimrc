@@ -381,7 +381,8 @@ nnoremap <leader>gg :GitGutterToggle<cr>
 let g:syntastic_mode_map = { 'mode' : 'passive',
                            \ 'active_filetypes': [''],
                            \ 'passive_filetypes': [''] }
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['flow', 'jsxhint']
+let g:syntastic_aggregate_errors = 1
 
 
 """""""""""""""
