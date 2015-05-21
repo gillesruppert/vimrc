@@ -123,7 +123,7 @@ set guioptions-=L
 
 """""" colour scheme & fonts
 " set t_Co=256
-set background=light
+set background=dark
 colorscheme solarized
 if has('gui_running')
   set guifont=Source\ Code\ Pro\ for\ Powerline:h11
