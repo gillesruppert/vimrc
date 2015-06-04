@@ -342,12 +342,20 @@ noremap <leader>gd :Gdiff<cr>
 
 " Ack/ag
 set grepprg=ag\ -ai " set ag as the grep programme
+let g:aghighlight=1
 
 nnoremap <leader>a :Ag<space>
-noremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
-noremap <leader>ac :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
-noremap <leader>ar :Ag '@providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads/powereditor<cr>
-let g:aghighlight=1
+nnoremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
+nnoremap <leader>ac :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
+nnoremap <leader>ar :Ag '@providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
+nnoremap <leader>aa :Ap<space>
+
+command! -nargs=1 Ap call Pag(<f-args>)
+
+function! Pag(search)
+  exec 'Ag ' . a:search . ' html/js/ads'
+endfunction
+
 
 " gundo
 if !has("python")
