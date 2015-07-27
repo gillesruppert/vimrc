@@ -151,3 +151,6 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/vim-flow"]
+	path = bundle/vim-flow
+	url = https://github.com/facebook/vim-flow.git

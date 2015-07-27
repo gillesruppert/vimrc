@@ -400,7 +400,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-noremap <leader>,, :w \| :SyntasticCheck<cr>
+let g:flow#enable = 0
+let g:flow#autoclose = 1
+noremap <leader>fm :FlowMake<cr>
+
 
 """""""""""""""
 " filetype specific
