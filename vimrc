@@ -35,6 +35,7 @@ set iskeyword+=$,_         " added word chars
 
 " show line number, cursor position
 set number
+set relativenumber
 set ruler
 set cursorline             " highlights the cursor line
 set nowrap
@@ -235,6 +236,9 @@ noremap <leader>mc :tabclose<cr>
 :noremap <leader>zf f{zf%
 :noremap zx za
 :noremap zb zf%
+:noremap zo zO
+:noremap <leader>fdm :set fdm=manual<cr>
+:noremap <leader>fds :set fdm=syntax<cr>
 
 " show invisible chars
 nnoremap <silent> <leader>i :set nolist!<CR>
@@ -247,72 +251,6 @@ noremap <leader>d :NERDTreeToggle<CR>
 noremap <leader>nf :NERDTreeFind<CR>
 let g:NERDChristmasTree=1
 
-
-" Unite
-" Use fuzzy matching in native Unite filters
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-
-let g:unite_source_history_yank_enable = 1
-nnoremap <silent> <leader>y :Unite -quick-match history/yank<cr>
-
-" Quickly jump between open buffers
-nnoremap <silent> <leader>b :Unite -start-insert -buffer-name=buffer buffer<cr>
-
-" FB-only
-nnoremap <silent> <leader>k :call FBBigGrep()<cr>
-
-" Speed up file_rec when there are lots of candidates
-let g:unite_redraw_hold_candidates = 1000
-
-" Use ag for search
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-"nnoremap <c-p> :Unite file_rec/async<cr>
-"nnoremap <space>/ :Unite grep:.<cr>
-"nnoremap <space>y :Unite history/yank<cr>
-"nnoremap <space>s :Unite -quick-match buffer<cr>
-"
-"nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-"nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-"nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-"nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-"nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-"nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
-
-"nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-"nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-"nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-"nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-"nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-"nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
-function! FBBigGrep()
-  call inputsave()
-  let q = input("TBGS>>  ")
-  call inputrestore()
-  if q == ""
-    return
-  endif
-
-  let query = substitute(q, ' ', '\\ ', 'g')
-  let q2 = substitute(query, ':', '\\:', 'g')
-  exec 'Unite -no-split -start-insert -buffer-name=tbgs biggrep:' . q2
-  return
-endfunction
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction
-
 " command-t
 nnoremap <c-f> :CommandT<cr>
 let g:CommandTMaxFiles=1000000000
@@ -322,11 +260,11 @@ let g:CommandTInputDebounce = 100
 let g:CommandTFileScanner = 'watchman'
 
 " TBGS
-nnoremap <leader>b :TBGS 
-nnoremap <leader>bb :TBGS <C-r>=expand("<cword>")<CR><cr>
-nnoremap <leader>bf :TBGS providesModule 
-nnoremap <leader>] :TBGS providesModule <C-r>=expand("<cword>")<CR><cr>
-nnoremap <leader>[ :TBGS require('<C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>t :TBGS 
+nnoremap <leader>tt :TBGS <C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>tm :TBGS providesModule 
+nnoremap <leader>tp :TBGS providesModule <C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>tr :TBGS require('<C-r>=expand("<cword>")<CR><cr>
 
 
 "localvimrc
@@ -349,6 +287,8 @@ nnoremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
 nnoremap <leader>ac :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
 nnoremap <leader>ar :Ag '@providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
 nnoremap <leader>aa :Ap<space>
+nnoremap <leader>as :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
+nnoremap <leader>ad :Ag '\brequire\(.<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
 
 command! -nargs=1 Ap call Pag(<f-args>)
 
@@ -404,6 +344,7 @@ let g:flow#enable = 0
 let g:flow#autoclose = 1
 noremap <leader>fm :FlowMake<cr>
 
+nnoremap <c-i> :Formatjs<cr>
 
 """""""""""""""
 " filetype specific
