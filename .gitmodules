@@ -154,3 +154,9 @@
 [submodule "bundle/vim-flow"]
 	path = bundle/vim-flow
 	url = https://github.com/facebook/vim-flow.git
+[submodule "bundle/vim-mercenary"]
+	path = bundle/vim-mercenary
+	url = https://github.com/jlfwong/vim-mercenary.git
+[submodule "bundle/format-js-vim"]
+	path = bundle/format-js-vim
+	url = git@bitbucket.org:gillesruppert/format-js-vim.git
