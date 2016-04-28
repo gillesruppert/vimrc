@@ -29,13 +29,13 @@ set spelllang=en           " set spell check language
 
 set wildmenu               " show autocomplete menus
 set wildmode=list:longest,list:full " completion menu behaves more like cli
-set wildignore+=*.o,tags,Session.vim
+set wildignore+=*.o,tags,Session.vim,lib/intern/generated/**
 
 set iskeyword+=$,_         " added word chars
 
 " show line number, cursor position
 set number
-set relativenumber
+set norelativenumber
 set ruler
 set cursorline             " highlights the cursor line
 set nowrap
@@ -282,13 +282,12 @@ noremap <leader>gd :Gdiff<cr>
 set grepprg=ag\ -ai " set ag as the grep programme
 let g:aghighlight=1
 
+nnoremap <leader>aa :Ap<space>
+nnoremap <leader>as :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
+nnoremap <leader>af :Ag 'providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
+nnoremap <leader>ar :Ag '\brequire\(.<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
-nnoremap <leader>ac :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
-nnoremap <leader>ar :Ag '@providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
-nnoremap <leader>aa :Ap<space>
-nnoremap <leader>as :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
-nnoremap <leader>ad :Ag '\brequire\(.<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<cr>
 
 command! -nargs=1 Ap call Pag(<f-args>)
 
@@ -310,18 +309,6 @@ let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'solarized'
 
-" old vim-powerline symbols
-"if !exists('g:airline_symbols')
-  "let g:airline_symbols = {}
-"endif
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ''
-
 " GitGutter plugin
 nnoremap <leader>gg :GitGutterToggle<cr>
 
@@ -340,11 +327,25 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" flow
 let g:flow#enable = 0
 let g:flow#autoclose = 1
 noremap <leader>fm :FlowMake<cr>
 
+" format js
 nnoremap <c-i> :Formatjs<cr>
+
+"Set any built in classes that will be ignored
+let g:formatjs_builtins='Promise,setTimeout'
+
+" Set any built in types that will be ignored
+let g:formatjs_builtintypes='Promise,ReactClass,$Keys,$Enum'
+
+" Any aliases to use, format is in csv pairs
+let g:formatjs_aliases='PowerEditorEventName,EventName,PowerEditorEventCategory,EventCategory'
+
+" JavaScript syntax
+let g:jsx_ext_required = 0
 
 """""""""""""""
 " filetype specific
