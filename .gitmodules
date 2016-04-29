@@ -169,3 +169,6 @@
 [submodule "bundle/vim-js-indent"]
 	path = bundle/vim-js-indent
 	url = https://github.com/gavocanov/vim-js-indent.git
+[submodule "bundle/vim-arcanist"]
+	path = bundle/vim-arcanist
+	url = https://github.com/jlfwong/vim-arcanist.git
