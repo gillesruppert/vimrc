@@ -8,8 +8,8 @@ silent! call pathogen#helptags()
 filetype plugin indent on
 
 let g:fb_default_opts = 0
-source $ADMIN_SCRIPTS/master.vimrc
-source $ADMIN_SCRIPTS/vim/biggrep.vim
+source $LOCAL_ADMIN_SCRIPTS/master.vimrc
+source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
 
 """""""""""""""""
 "general settings
@@ -263,7 +263,7 @@ let g:CommandTFileScanner = 'watchman'
 nnoremap <leader>t :TBGS 
 nnoremap <leader>tt :TBGS <C-r>=expand("<cword>")<CR><cr>
 nnoremap <leader>tm :TBGS providesModule 
-nnoremap <leader>tp :TBGS providesModule <C-r>=expand("<cword>")<CR><cr>
+nnoremap <leader>tf :TBGS providesModule <C-r>=expand("<cword>")<CR><cr>
 nnoremap <leader>tr :TBGS require('<C-r>=expand("<cword>")<CR><cr>
 
 
