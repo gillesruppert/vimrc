@@ -37,9 +37,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/textile"]
-	path = bundle/textile
-	url = https://github.com/vim-scripts/Textile-for-VIM.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
@@ -52,9 +49,6 @@
 [submodule "bundle/vim-jade"]
 	path = bundle/vim-jade
 	url = https://github.com/digitaltoad/vim-jade.git
-[submodule "bundle/vim-coffee-script"]
-	path = bundle/vim-coffee-script
-	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule "bundle/localvimrc"]
 	path = bundle/localvimrc
 	url = https://github.com/vim-scripts/localvimrc.git
@@ -64,12 +58,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/jscomplete"]
-	path = bundle/jscomplete
-	url =  https://github.com/mattn/jscomplete-vim.git
-[submodule "bundle/node-js-complete"]
-	path = bundle/node-js-complete
-	url = https://github.com/myhere/vim-nodejs-complete.git
 [submodule "bundle/vim-javascript-syntax"]
 	path = bundle/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
@@ -82,21 +70,9 @@
 [submodule "bundle/supertab.git"]
 	path = bundle/supertab.git
 	url = https://github.com/ervandew/supertab.git
-[submodule "bundle/scss-syntax"]
-	path = bundle/scss-syntax
-	url = https://github.com/cakebaker/scss-syntax.vim.git
 [submodule "bundle/vim-rails"]
 	path = bundle/vim-rails
 	url = https://github.com/tpope/vim-rails.git
-[submodule "bundle/vim-bundler"]
-	path = bundle/vim-bundler
-	url = https://github.com/tpope/vim-bundler.git
-[submodule "bundle/vim-javascript"]
-	path = bundle/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
-[submodule "bundle/vim-handlebars"]
-	path = bundle/vim-handlebars
-	url = https://github.com/nono/vim-handlebars.git
 [submodule "bundle/VisIncr"]
 	path = bundle/VisIncr
 	url = https://github.com/vim-scripts/VisIncr.git
@@ -115,9 +91,6 @@
 [submodule "bundle/vim-matchit"]
 	path = bundle/vim-matchit
 	url = https://github.com/edsono/vim-matchit.git
-[submodule "bundle/funcoo.vim"]
-	path = bundle/funcoo.vim
-	url = https://github.com/rizzatti/funcoo.vim.git
 [submodule "bundle/dash.vim"]
 	path = bundle/dash.vim
 	url = https://github.com/rizzatti/dash.vim.git
@@ -165,7 +138,7 @@
 	url = https://github.com/gillesruppert/format-js-vim.git
 [submodule "bundle/yajs.vim"]
 	path = bundle/yajs.vim
-	url = https://github.com/irrationalistic/yajs.vim.git
+	url = https://github.com/gillesruppert/yajs.vim.git
 [submodule "bundle/vim-js-indent"]
 	path = bundle/vim-js-indent
 	url = https://github.com/gavocanov/vim-js-indent.git
@@ -175,6 +148,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "bundle/vim-javacript-syntax"]
-	path = bundle/vim-javacript-syntax
-	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule "es.next.syntax.vim"]
+	path = es.next.syntax.vim
+	url = https://github.com/othree/es.next.syntax.vim.git
