@@ -106,9 +106,6 @@
 [submodule "bundle/vim-mercenary"]
 	path = bundle/vim-mercenary
 	url = https://github.com/jlfwong/vim-mercenary.git
-[submodule "bundle/es.next.syntax.vim"]
-	path = bundle/es.next.syntax.vim
-	url = https://github.com/othree/es.next.syntax.vim.git
 [submodule "bundle/format-js-vim"]
 	path = bundle/format-js-vim
 	url = https://github.com/gillesruppert/format-js-vim.git
@@ -121,3 +118,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "bundle/yajs.vim"]
+	path = bundle/yajs.vim
+	url = https://github.com/gillesruppert/yajs.vim.git
