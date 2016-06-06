@@ -29,7 +29,7 @@ set spelllang=en           " set spell check language
 
 set wildmenu               " show autocomplete menus
 set wildmode=list:longest,list:full " completion menu behaves more like cli
-set wildignore+=*.o,tags,Session.vim,lib/intern/generated/**
+set wildignore+=*.o,tags,Session.vim,*/node-haste-cache
 
 set iskeyword+=$,_         " added word chars
 
@@ -128,8 +128,9 @@ endif
 
 " folding
 set foldenable                   " enable folding
-set foldmethod=manual            " detect triple-{ style fold markers
-set foldlevel=99
+set foldmethod=syntax            " detect triple-{ style fold markers
+set foldlevel=3
+set foldnestmax=5
 
 
 """""""""""""""""
@@ -145,7 +146,8 @@ autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 "au FileType javascript call JavaScriptFold()
-autocmd FileType javascript setlocal foldmethod=manual
+"autocmd FileType javascript setlocal foldmethod=manual
+":autocmd FileType javascript set foldmethod=manual
 
 
 """"""""""""""""""""
@@ -258,6 +260,7 @@ let g:CommandTMaxDepth=50
 let g:CommandTMaxHeight = 30
 let g:CommandTInputDebounce = 100
 let g:CommandTFileScanner = 'watchman'
+let g:CommandTSmartCase = 1
 
 " TBGS
 nnoremap <leader>t :TBGS 
@@ -280,16 +283,16 @@ noremap <leader>gd :Gdiff<cr>
 
 " Ack/ag
 set grepprg=ag\ -ai " set ag as the grep programme
-let g:aghighlight=1
+let g:ag_highlight=1
 
-nnoremap <leader>aa :Ap<space>
+nnoremap <leader>aa :PE<space>
 nnoremap <leader>as :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
 nnoremap <leader>af :Ag 'providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
 nnoremap <leader>ar :Ag '\brequire\(.<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
 
-command! -nargs=1 Ap call Pag(<f-args>)
+command! -nargs=1 PE call Pag(<f-args>)
 
 function! Pag(search)
   exec 'Ag ' . a:search . ' html/js/ads'
@@ -307,7 +310,9 @@ autocmd FileType php let b:surround_45 = "<?php \r ?>"
 " airline plugin
 let g:airline_powerline_fonts = 1
 "let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'solarized'
+"let g:airline_theme = 'solarized'
+let g:airline_detect_paste=1
+let g:airline_inactive_collapse=1
 
 " GitGutter plugin
 nnoremap <leader>gg :GitGutterToggle<cr>
@@ -336,13 +341,17 @@ noremap <leader>fm :FlowMake<cr>
 nnoremap <c-i> :Formatjs<cr>
 
 "Set any built in classes that will be ignored
-let g:formatjs_builtins='Promise,setTimeout'
+"let g:formatjs_builtins='Promise,setTimeout,spyOn'
+let g:formatjs_builtins='Array,Boolean,Date,Error,Function,Infinity,JSON,Math,Number,Object,Promise,RegExp,String,Symbol,arguments,global,isFinite,isNaN,parseFloat,parseInt,undefined,console,alert,clearInterval,clearTimeout,confirm,decodeURI,decodeURIComponent,document,encodeURI,encodeURIComponent,escape,indexedDB,location,localStorage,open,performanceprompt,screen,sessionStorage,setInterval,setTimeout,window,Option,exports,module,require,__DEV__,afterEach,beforeEach,describe,expect,it,jest,waitsForPromise,jasmine,spyOn,mockRunTimersOnce'
+
 
 " Set any built in types that will be ignored
-let g:formatjs_builtintypes='Promise,ReactClass,$Keys,$Enum'
+"let g:formatjs_builtintypes='Promise,ReactClass,$Keys,$Enum'
+let g:formatjs_builtintypes='\$Keys,\$Enum,$jsx,AdAccountID,FBID,Fbt,Function,HTMLElement,Iterable,Map,ReactElement,Set'
+
 
 " Any aliases to use, format is in csv pairs
-let g:formatjs_aliases='PowerEditorEventName,EventName,PowerEditorEventCategory,EventCategory'
+let g:formatjs_aliases='PowerEditorEventName,EventName,PowerEditorEventCategory,EventCategory,immutable,Immutable,fbt,fbt'
 
 " JavaScript syntax
 let g:jsx_ext_required = 0
@@ -356,7 +365,6 @@ autocmd FileType c,cpp,python,ruby,java,html,twig,css,scss,json,javascript autoc
 " format json
 autocmd FileType json nnoremap <leader>f :%!jsonlint<cr>
 
-:autocmd FileType javascript set foldmethod=manual
 
 " Python settings
 :autocmd FileType python set expandtab
