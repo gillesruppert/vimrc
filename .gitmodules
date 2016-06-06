@@ -172,3 +172,9 @@
 [submodule "bundle/vim-arcanist"]
 	path = bundle/vim-arcanist
 	url = https://github.com/jlfwong/vim-arcanist.git
+[submodule "bundle/vim-airline-themes"]
+	path = bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "bundle/vim-javacript-syntax"]
+	path = bundle/vim-javacript-syntax
+	url = https://github.com/jelera/vim-javascript-syntax.git
