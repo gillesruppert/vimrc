@@ -118,6 +118,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "bundle/yajs.vim"]
-	path = bundle/yajs.vim
-	url = https://github.com/gillesruppert/yajs.vim.git
+[submodule "bundle/es.next.syntax.vim"]
+	path = bundle/es.next.syntax.vim
+	url = https://github.com/othree/es.next.syntax.vim.git
