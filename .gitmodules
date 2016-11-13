@@ -75,7 +75,7 @@
 	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-matchit"]
 	path = bundle/vim-matchit
-	url = https://github.com/edsono/vim-matchit.git
+	url = https://github.com/vim-scripts/matchit.zip.git
 [submodule "bundle/dash.vim"]
 	path = bundle/dash.vim
 	url = https://github.com/rizzatti/dash.vim.git
@@ -121,3 +121,12 @@
 [submodule "bundle/es.next.syntax.vim"]
 	path = bundle/es.next.syntax.vim
 	url = https://github.com/othree/es.next.syntax.vim.git
+[submodule "bundle/yajs.vim"]
+	path = bundle/yajs.vim
+	url = https://github.com/gillesruppert/yajs.vim.git
+[submodule "bundle/vim-javascript-syntax"]
+	path = bundle/vim-javascript-syntax
+	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule "bundle/vim-javascript"]
+	path = bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git

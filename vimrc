@@ -121,6 +121,7 @@ set guioptions-=L
 """""" colour scheme & fonts
 set t_Co=256
 set background=dark
+" set background=light
 colorscheme solarized
 if has('gui_running')
   set guifont=Source\ Code\ Pro\ for\ Powerline:h14
@@ -146,8 +147,8 @@ autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqan nonu spell textwidth=80
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 "au FileType javascript call JavaScriptFold()
-"autocmd FileType javascript setlocal foldmethod=manual
-":autocmd FileType javascript set foldmethod=manual
+autocmd FileType javascript setlocal foldmethod=manual
+autocmd FileType javascript set foldmethod=manual
 
 
 """"""""""""""""""""
@@ -155,6 +156,13 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " edit and save .vimrc quickly
 nnoremap <silent> <leader>ev :vsplit $HOME/.vim/vimrc<cr>
 nnoremap <silent> <leader>sv :so $HOME/.vim/vimrc<cr>
+
+nnoremap <leader>s :mksession! session.vim<cr>
+nnoremap <leader>o :source session.vim<cr>
+
+" go to diffusion
+nnoremap <silent> <LocalLeader>dd :call functions#private#diffusion()<CR>
+
 
 " map Y to match C and D behavior
 nnoremap Y y$
@@ -214,8 +222,8 @@ noremap <leader>. :b#<cr>          " cycle between buffers
 :noremap <leader>h :split<CR>
 
 " Make current window the only one
-:noremap <leader>O :only :tabo<CR>
-:noremap <leader>o :only<CR>
+" :noremap <leader>O :only :tabo<CR>
+" :noremap <leader>o :only<CR>
 
 " remap going through windows
 noremap <c-j> <c-w>j
@@ -228,10 +236,10 @@ noremap <c-h> <c-w>h
 "noremap <c-c>h <c-w>h<c-w>c<c-w>l
 
 "tabs
-noremap <leader>mn :tabnew<cr>
-noremap <leader>mj :tabprevious<cr>
-noremap <leader>mk :tabnext<cr>
-noremap <leader>mc :tabclose<cr>
+noremap <c-d>c :tabnew<cr>
+noremap <c-d><c-h> :tabprevious<cr>
+noremap <c-d><c-l> :tabnext<cr>
+noremap <c-d>cc :tabclose<cr>
 
 " folds
 :noremap <leader>zz zf%
@@ -245,6 +253,9 @@ noremap <leader>mc :tabclose<cr>
 " show invisible chars
 nnoremap <silent> <leader>i :set nolist!<CR>
 
+" close fixlist
+nnoremap <leader>c :ccl<cr>
+
 
 """"""""""""""""
 " Plugin settings
@@ -252,6 +263,10 @@ nnoremap <silent> <leader>i :set nolist!<CR>
 noremap <leader>d :NERDTreeToggle<CR>
 noremap <leader>nf :NERDTreeFind<CR>
 let g:NERDChristmasTree=1
+
+" nerd commenter
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign='left'
 
 " command-t
 nnoremap <c-f> :CommandT<cr>
@@ -287,10 +302,11 @@ let g:ag_highlight=1
 
 nnoremap <leader>aa :PE<space>
 nnoremap <leader>as :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
+nnoremap <leader>av :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads/validation<CR>
 nnoremap <leader>af :Ag 'providesModule\s\b<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
 nnoremap <leader>ar :Ag '\brequire\(.<C-r>=expand("<cword>")<CR>\b'<space>html/js/ads<CR>
 nnoremap <leader>a :Ag<space>
-nnoremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
+"nnoremap <leader>c :Ag '\b<C-r>=expand("<cword>")<CR>\b'<space><cr>
 
 command! -nargs=1 PE call Pag(<f-args>)
 
@@ -323,9 +339,9 @@ let g:syntastic_mode_map = { 'mode' : 'passive',
                            \ 'passive_filetypes': [''] }
 let g:syntastic_javascript_checkers = ['flow', 'jsxhint']
 let g:syntastic_aggregate_errors = 1
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -387,4 +403,10 @@ fun! <SID>StripTrailingWhitespaces()
   %s/\s\+$//e
   call cursor(l, c)
 endfun
+
+" go to diffusion
+"function! functions#private#diffusion() abort
+  "execute "!open 'https://our.intern.facebook.com/intern/bunny/?q=tbgl+'" .
+        "\ "'" . expand('<cword>') . "'"
+"endfunction
 
