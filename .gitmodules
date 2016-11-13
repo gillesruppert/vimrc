@@ -73,9 +73,6 @@
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "bundle/vim-matchit"]
-	path = bundle/vim-matchit
-	url = https://github.com/vim-scripts/matchit.zip.git
 [submodule "bundle/dash.vim"]
 	path = bundle/dash.vim
 	url = https://github.com/rizzatti/dash.vim.git
