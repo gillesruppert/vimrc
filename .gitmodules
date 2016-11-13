@@ -118,9 +118,6 @@
 [submodule "bundle/es.next.syntax.vim"]
 	path = bundle/es.next.syntax.vim
 	url = https://github.com/othree/es.next.syntax.vim.git
-[submodule "bundle/yajs.vim"]
-	path = bundle/yajs.vim
-	url = https://github.com/gillesruppert/yajs.vim.git
 [submodule "bundle/vim-javascript-syntax"]
 	path = bundle/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
