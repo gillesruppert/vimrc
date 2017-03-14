@@ -97,9 +97,6 @@
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "bundle/vim-matchit"]
-	path = bundle/vim-matchit
-	url = https://github.com/edsono/vim-matchit.git
 [submodule "bundle/funcoo.vim"]
 	path = bundle/funcoo.vim
 	url = https://github.com/rizzatti/funcoo.vim.git
@@ -118,3 +115,6 @@
 [submodule "bundle/vim-flavored-markdown"]
 	path = bundle/vim-flavored-markdown
 	url = https://github.com/jtratner/vim-flavored-markdown.git
+[submodule "bundle/vim-matchit"]
+	path = bundle/vim-matchit
+	url = https://github.com/codescv/vim-matchit.git
